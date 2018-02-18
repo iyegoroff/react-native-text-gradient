@@ -1,0 +1,326 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		740937021F3FC2B800E9A84E /* RNLinearTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */; };
+		740937051F3FC35400E9A84E /* RNShadowLinearTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */; };
+		740937091F3FE30700E9A84E /* RNShadowRadialTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937081F3FE30700E9A84E /* RNShadowRadialTextGradient.m */; };
+		7409370C1F3FE35F00E9A84E /* RNRadialTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */; };
+		741134D41F4119800084A73D /* RNGradientValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 741134D31F4119800084A73D /* RNGradientValue.m */; };
+		7441E35A1F3DE6740007858B /* RNTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441E3591F3DE6740007858B /* RNTextGradient.m */; };
+		7461C09F1F361B2D00BA8FD4 /* RNTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */; };
+		74D4C0E11F3BABBC00111BA4 /* RNShadowTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58B511D91A9E6C8500147676 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		134814201AA4EA6300B7C361 /* libRNTextGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTextGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		740937001F3FC2B800E9A84E /* RNLinearTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNLinearTextGradientManager.h; sourceTree = "<group>"; };
+		740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNLinearTextGradientManager.m; sourceTree = "<group>"; };
+		740937031F3FC35400E9A84E /* RNShadowLinearTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowLinearTextGradient.h; sourceTree = "<group>"; };
+		740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowLinearTextGradient.m; sourceTree = "<group>"; };
+		740937071F3FE30700E9A84E /* RNShadowRadialTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowRadialTextGradient.h; sourceTree = "<group>"; };
+		740937081F3FE30700E9A84E /* RNShadowRadialTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowRadialTextGradient.m; sourceTree = "<group>"; };
+		7409370A1F3FE35F00E9A84E /* RNRadialTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNRadialTextGradientManager.h; sourceTree = "<group>"; };
+		7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNRadialTextGradientManager.m; sourceTree = "<group>"; };
+		741134D21F4119800084A73D /* RNGradientValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGradientValue.h; sourceTree = "<group>"; };
+		741134D31F4119800084A73D /* RNGradientValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGradientValue.m; sourceTree = "<group>"; };
+		7441E3581F3DE6740007858B /* RNTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNTextGradient.h; sourceTree = "<group>"; };
+		7441E3591F3DE6740007858B /* RNTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTextGradient.m; sourceTree = "<group>"; };
+		7461C09D1F361B2D00BA8FD4 /* RNTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNTextGradientManager.h; sourceTree = "<group>"; };
+		7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientManager.m; sourceTree = "<group>"; };
+		74D4C0DF1F3BABBB00111BA4 /* RNShadowTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowTextGradient.h; sourceTree = "<group>"; };
+		74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowTextGradient.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58B511D81A9E6C8500147676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		134814211AA4EA7D00B7C361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				134814201AA4EA6300B7C361 /* libRNTextGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58B511D21A9E6C8500147676 = {
+			isa = PBXGroup;
+			children = (
+				740937061F3FE2C700E9A84E /* Radial */,
+				740936FF1F3FC26900E9A84E /* Linear */,
+				740936FE1F3FC23500E9A84E /* Base */,
+				134814211AA4EA7D00B7C361 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		740936FE1F3FC23500E9A84E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7441E3581F3DE6740007858B /* RNTextGradient.h */,
+				7441E3591F3DE6740007858B /* RNTextGradient.m */,
+				74D4C0DF1F3BABBB00111BA4 /* RNShadowTextGradient.h */,
+				74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */,
+				7461C09D1F361B2D00BA8FD4 /* RNTextGradientManager.h */,
+				7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */,
+				741134D21F4119800084A73D /* RNGradientValue.h */,
+				741134D31F4119800084A73D /* RNGradientValue.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		740936FF1F3FC26900E9A84E /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				740937031F3FC35400E9A84E /* RNShadowLinearTextGradient.h */,
+				740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */,
+				740937001F3FC2B800E9A84E /* RNLinearTextGradientManager.h */,
+				740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		740937061F3FE2C700E9A84E /* Radial */ = {
+			isa = PBXGroup;
+			children = (
+				740937071F3FE30700E9A84E /* RNShadowRadialTextGradient.h */,
+				740937081F3FE30700E9A84E /* RNShadowRadialTextGradient.m */,
+				7409370A1F3FE35F00E9A84E /* RNRadialTextGradientManager.h */,
+				7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */,
+			);
+			name = Radial;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58B511DA1A9E6C8500147676 /* RNTextGradient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNTextGradient" */;
+			buildPhases = (
+				58B511D71A9E6C8500147676 /* Sources */,
+				58B511D81A9E6C8500147676 /* Frameworks */,
+				58B511D91A9E6C8500147676 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNTextGradient;
+			productName = RCTDataManager;
+			productReference = 134814201AA4EA6300B7C361 /* libRNTextGradient.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58B511D31A9E6C8500147676 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58B511DA1A9E6C8500147676 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNTextGradient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 58B511D21A9E6C8500147676;
+			productRefGroup = 58B511D21A9E6C8500147676;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58B511DA1A9E6C8500147676 /* RNTextGradient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58B511D71A9E6C8500147676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74D4C0E11F3BABBC00111BA4 /* RNShadowTextGradient.m in Sources */,
+				7441E35A1F3DE6740007858B /* RNTextGradient.m in Sources */,
+				7409370C1F3FE35F00E9A84E /* RNRadialTextGradientManager.m in Sources */,
+				740937051F3FC35400E9A84E /* RNShadowLinearTextGradient.m in Sources */,
+				740937091F3FE30700E9A84E /* RNShadowRadialTextGradient.m in Sources */,
+				7461C09F1F361B2D00BA8FD4 /* RNTextGradientManager.m in Sources */,
+				740937021F3FC2B800E9A84E /* RNLinearTextGradientManager.m in Sources */,
+				741134D41F4119800084A73D /* RNGradientValue.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		58B511ED1A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58B511EE1A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58B511F01A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../../react-native/Libraries",
+					"$(SRCROOT)/../../../../node_modules/React",
+					"$(SRCROOT)/../../../node_modules/react-native/React",
+					"$(SRCROOT)/../../../node_modules/react-native/Libraries",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNTextGradient;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/../../react-native/Libraries",
+					"$(SRCROOT)/../../../../node_modules/React",
+					"$(SRCROOT)/../../../node_modules/react-native/React",
+					"$(SRCROOT)/../../../node_modules/react-native/Libraries",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNTextGradient;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNTextGradient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511ED1A9E6C8500147676 /* Debug */,
+				58B511EE1A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNTextGradient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511F01A9E6C8500147676 /* Debug */,
+				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
+}
