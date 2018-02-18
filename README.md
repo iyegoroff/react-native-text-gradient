@@ -1,5 +1,9 @@
 
 # react-native-text-gradient
+[![npm version](https://badge.fury.io/js/react-native-text-gradient.svg?t=1495378566925)](https://badge.fury.io/js/react-native-text-gradient)
+[![Dependency Status](https://david-dm.org/iyegoroff/react-native-text-gradient.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-text-gradient)
+[![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](#typescript)
+[![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/react-native-text-gradient)
 
 React-Native text gradient component for iOS & Android.
 
