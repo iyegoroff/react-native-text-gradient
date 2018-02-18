@@ -58,7 +58,7 @@ When mixing several text gradients and `Text`s top component always should be te
   <LinearTextGradient {...anotherGradientProps}>321</LinearTextGradient>
 </LinearTextGradient>
 ```
-This is neccesary because only top text component is 'mapped' to actual native node and its children are 'virtual' from the native perspective.
+This is necessary because only top text component is 'mapped' to actual native node and its children are 'virtual' from the native perspective.
 
 ## FAQ
 
