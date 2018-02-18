@@ -28,7 +28,7 @@ React-Native text gradient component for iOS & Android.
 ## Usage
 
 ### LinearTextGradient
-Is similar to https://github.com/react-native-community/react-native-linear-gradient#examples
+Interface is similar to https://github.com/react-native-community/react-native-linear-gradient#examples
 ```javascript
 import { LinearTextGradient } from 'react-native-text-gradient';
 
