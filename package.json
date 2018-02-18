@@ -8,9 +8,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyegoroff/react-native-text-gradient.git"
+  },
   "keywords": [
-    "react-native"
+    "react-native",
+    "text-gradients"
   ],
-  "author": "",
-  "license": ""
+  "author": "iyegoroff <iegoroff@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iyegoroff/react-native-text-gradient/issues"
+  },
+  "homepage": "https://github.com/iyegoroff/react-native-text-gradient#readme"
 }
