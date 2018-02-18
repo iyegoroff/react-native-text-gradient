@@ -29,7 +29,7 @@ Is similar to https://github.com/react-native-community/react-native-linear-grad
 import { LinearTextGradient } from 'react-native-text-gradient';
 
 <LinearTextGradient
-  style={{ fontWeight: 'bold' }}
+  style={{ fontWeight: 'bold', fontSize: 72 }}
   locations={[0, 1]}
   colors={['red', 'blue']}
   start={{ x: 0, y: 0 }}
@@ -38,6 +38,11 @@ import { LinearTextGradient } from 'react-native-text-gradient';
   THIS IS TEXT GRADIENT
 </LinearTextGradient>
 ```
+
+iOS                                            |  Android
+:---------------------------------------------:|:---------------------------------------------:
+<img src="ios.png" align="left" height="275">  |  <img src="android.jpg" align="right" height="275">
+
 
 ## Caveats
 
