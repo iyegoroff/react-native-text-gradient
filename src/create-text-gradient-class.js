@@ -371,7 +371,7 @@ const createTextGradientClass = (
       }
 
       newProps.style = [
-        ...{ color: 'gray' },
+        { color: 'gray' },
         newProps.style
       ];
 
