@@ -67,6 +67,20 @@ An optional array of numbers defining the location of each gradient color stop, 
 #### useViewFrame
 Optional. If true gradient will be calculated for text view background frame rather than text frame.
 
+```javascript
+<LinearTextGradient
+  numberOfLines={1}
+  useViewFrame={true}
+  locations={[0.5, 0.95]}
+  // note colors like '#FF000000' are used for seamless transition to transparent
+  colors={['#FF0000', '#FF000000']}
+  start={{ x: 0, y: 0 }}
+  end={{ x: 1, y: 0 }}
+>
+  %%%%%%%%%%%%%%%%%%%%%%
+</LinearTextGradient>
+```
+
 <img src="img/useViewFrame.png" width="300">
 
 
