@@ -25,6 +25,28 @@ React-Native text gradient component for iOS & Android.
 - Android - WIP, currently only basic 'wrapper'-like behavior without nesting is supported;
 - React-Native - supported version >0.50, except of 0.53.0.
 
+
+## Example
+
+```javascript
+import { LinearTextGradient } from 'react-native-text-gradient';
+
+<LinearTextGradient
+  style={{ fontWeight: 'bold', fontSize: 72 }}
+  locations={[0, 1]}
+  colors={['red', 'blue']}
+  start={{ x: 0, y: 0 }}
+  end={{ x: 1, y: 0 }}
+>
+  THIS IS TEXT GRADIENT
+</LinearTextGradient>
+```
+
+iOS                                            |  Android
+:---------------------------------------------:|:---------------------------------------------:
+<img src="img/ios.png" align="left" height="275">  |  <img src="img/android.jpg" align="right" height="275">
+
+
 ## Usage
 
 ### LinearTextGradient
@@ -46,27 +68,6 @@ An optional array of numbers defining the location of each gradient color stop, 
 Optional. If true gradient will be calculated for text view background frame rather than text frame.
 
 <img src="img/useViewFrame.png" width="300">
-
-
-## Example
-
-```javascript
-import { LinearTextGradient } from 'react-native-text-gradient';
-
-<LinearTextGradient
-  style={{ fontWeight: 'bold', fontSize: 72 }}
-  locations={[0, 1]}
-  colors={['red', 'blue']}
-  start={{ x: 0, y: 0 }}
-  end={{ x: 1, y: 0 }}
->
-  THIS IS TEXT GRADIENT
-</LinearTextGradient>
-```
-
-iOS                                            |  Android
-:---------------------------------------------:|:---------------------------------------------:
-<img src="img/ios.png" align="left" height="275">  |  <img src="img/android.jpg" align="right" height="275">
 
 
 ## Caveats
