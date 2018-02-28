@@ -48,14 +48,17 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     SpannableStringBuilder builder,
     int start,
     int end,
-    float maxWidth
+    float maxWidth,
+    float maxHeight
   ) {
     RNLinearTextGradientSpan span = new RNLinearTextGradientSpan(
       mLocations,
       mColors,
       mStart,
       mEnd,
+      mUseViewFrame,
       maxWidth,
+      maxHeight,
       start,
       end,
       builder.toString()

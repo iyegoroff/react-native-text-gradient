@@ -33,8 +33,6 @@ const createTextGradientClass = (
   const defaultPropAttributes = Object.keys(defaultProps)
     .reduce((acc, key) => { acc[key] = true; return acc; }, {});
 
-  const defaultStyle = { color: 'gray' };
-
   const viewConfig = {
     validAttributes: mergeFast(ReactNativeViewAttributes.UIView, {
       isHighlighted: true,
@@ -56,58 +54,6 @@ const createTextGradientClass = (
     uiViewClassName,
   };
 
-  /**
-   * A React component for displaying text.
-   *
-   * `Text` supports nesting, styling, and touch handling.
-   *
-   * In the following example, the nested title and body text will inherit the `fontFamily` from
-   *`styles.baseText`, but the title provides its own additional styles.  The title and body will
-  * stack on top of each other on account of the literal newlines:
-  *
-  * ```ReactNativeWebPlayer
-  * import React, { Component } from 'react';
-  * import { AppRegistry, Text, StyleSheet } from 'react-native';
-  *
-  * export default class TextInANest extends Component {
-  *   constructor(props) {
-  *     super(props);
-  *     this.state = {
-  *       titleText: "Bird's Nest",
-  *       bodyText: 'This is not really a bird nest.'
-  *     };
-  *   }
-  *
-  *   render() {
-  *     return (
-  *       <Text style={styles.baseText}>
-  *         <Text style={styles.titleText} onPress={this.onPressTitle}>
-  *           {this.state.titleText}{'\n'}{'\n'}
-  *         </Text>
-  *         <Text numberOfLines={5}>
-  *           {this.state.bodyText}
-  *         </Text>
-  *       </Text>
-  *     );
-  *   }
-  * }
-  *
-  * const styles = StyleSheet.create({
-  *   baseText: {
-  *     fontFamily: 'Cochin',
-  *   },
-  *   titleText: {
-  *     fontSize: 20,
-  *     fontWeight: 'bold',
-  *   },
-  * });
-  *
-  * // skip this line if using Create React Native App
-  * AppRegistry.registerComponent('TextInANest', () => TextInANest);
-  * ```
-  */
-
-  // $FlowFixMe(>=0.41.0)
   const TextGradient = createReactClass({
     displayName: 'TextGradient',
     propTypes: {
@@ -192,7 +138,6 @@ const createTextGradientClass = (
       testID: PropTypes.string,
       /**
        * Used to locate this view from native code.
-       * @platform android
        */
       nativeID: PropTypes.string,
       /**
@@ -231,7 +176,6 @@ const createTextGradientClass = (
         accessible: true,
         allowFontScaling: true,
         ellipsizeMode: 'tail',
-        disabled: false,
       };
     },
     getInitialState: function () {
@@ -242,9 +186,7 @@ const createTextGradientClass = (
     mixins: [NativeMethodsMixin],
     viewConfig: viewConfig,
     getChildContext() {
-      return {
-        isInAParentText: true
-      };
+      return { isInAParentText: true };
     },
     childContextTypes: {
       isInAParentText: PropTypes.bool
@@ -319,44 +261,33 @@ const createTextGradientClass = (
                   return this.props.pressRetentionOffset || PRESS_RECT_OFFSET;
                 };
               }
-              // $FlowFixMe(>=0.41.0)
               return setResponder;
             },
             onResponderGrant: function (e, dispatchID) {
-              // $FlowFixMe(>=0.41.0)
               this.touchableHandleResponderGrant(e, dispatchID);
               this.props.onResponderGrant &&
-                // $FlowFixMe(>=0.41.0)
                 this.props.onResponderGrant.apply(this, arguments);
             }.bind(this),
             onResponderMove: function (e) {
-              // $FlowFixMe(>=0.41.0)
               this.touchableHandleResponderMove(e);
               this.props.onResponderMove &&
-                // $FlowFixMe(>=0.41.0)
                 this.props.onResponderMove.apply(this, arguments);
             }.bind(this),
             onResponderRelease: function (e) {
-              // $FlowFixMe(>=0.41.0)
               this.touchableHandleResponderRelease(e);
               this.props.onResponderRelease &&
-                // $FlowFixMe(>=0.41.0)
                 this.props.onResponderRelease.apply(this, arguments);
             }.bind(this),
             onResponderTerminate: function (e) {
-              // $FlowFixMe(>=0.41.0)
               this.touchableHandleResponderTerminate(e);
               this.props.onResponderTerminate &&
-                // $FlowFixMe(>=0.41.0)
                 this.props.onResponderTerminate.apply(this, arguments);
             }.bind(this),
             onResponderTerminationRequest: function () {
               // Allow touchable or props.onResponderTerminationRequest to deny
               // the request
-              // $FlowFixMe(>=0.41.0)
               var allowTermination = this.touchableHandleResponderTerminationRequest();
               if (allowTermination && this.props.onResponderTerminationRequest) {
-                // $FlowFixMe(>=0.41.0)
                 allowTermination = this.props.onResponderTerminationRequest.apply(this, arguments);
               }
               return allowTermination;
@@ -369,6 +300,11 @@ const createTextGradientClass = (
           isHighlighted: this.state.isHighlighted,
         };
       }
+
+      newProps = {
+        ...newProps,
+        style: [{ color: 'gray' }, newProps.style],
+      };
 
       newProps.style = [
         { color: 'gray' },
@@ -390,9 +326,7 @@ const createTextGradientClass = (
       if (Touchable.TOUCH_TARGET_DEBUG && newProps.onPress) {
         newProps = {
           ...newProps,
-          style: [this.props.style, {
-            color: 'magenta'
-          }],
+          style: [this.props.style, { color: 'magenta' }],
         };
       }
       if (this.context.isInAParentText) {

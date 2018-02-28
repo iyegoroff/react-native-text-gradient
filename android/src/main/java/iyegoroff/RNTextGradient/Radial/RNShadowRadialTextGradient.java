@@ -36,7 +36,8 @@ public class RNShadowRadialTextGradient extends RNShadowTextGradient {
     SpannableStringBuilder builder,
     int start,
     int end,
-    float maxWidth
+    float maxWidth,
+    float maxHeight
   ) {
     return null;
   }

@@ -22,13 +22,31 @@ React-Native text gradient component for iOS & Android.
 ## Status
 
 - iOS - component works as drop-in replacement for standard `Text` component, e.g. it is possible to have nested gradients;
-- Android - WIP, currently only basic 'wrapper'-like behavior without nesting is supported.
-- React-Native - supported versions 0.50 - 0.52 , component is not usable with 0.53.0 because of this rn [bug](https://github.com/facebook/react-native/issues/17933)
+- Android - WIP, currently only basic 'wrapper'-like behavior without nesting is supported;
+- React-Native - supported version >0.50, except of 0.53.0.
 
 ## Usage
 
 ### LinearTextGradient
-Interface is similar to https://github.com/react-native-community/react-native-linear-gradient#examples
+Interface is similar to `Text` & [LinearGradient](https://github.com/react-native-community/react-native-linear-gradient)
+
+#### colors
+An array of at least two color values that represent gradient colors. Example: `['red', 'blue']` sets gradient from red to blue.
+  
+#### start
+An optional object of the following type: `{ x: number, y: number }`. Coordinates declare the position that the gradient starts at, as a fraction of the overall size of the gradient, starting from the top left corner. Example: `{ x: 0.1, y: 0.1 }` means that the gradient will start 10% from the top and 10% from the left.
+ 
+#### end
+Same as start, but for the end of the gradient.
+ 
+#### locations
+An optional array of numbers defining the location of each gradient color stop, mapping to the color with the same index in `colors` prop. Example: `[0.1, 0.75, 1]` means that first color will take 0% - 10%, second color will take 10% - 75% and finally third color will occupy 75% - 100%.
+
+#### useViewFrame
+Optional. If true gradient will be calculated for text view background frame rather than text frame.
+
+<img src="img/useViewFrame.png" width="300">
+
 ```javascript
 import { LinearTextGradient } from 'react-native-text-gradient';
 
@@ -45,7 +63,7 @@ import { LinearTextGradient } from 'react-native-text-gradient';
 
 iOS                                            |  Android
 :---------------------------------------------:|:---------------------------------------------:
-<img src="ios.png" align="left" height="275">  |  <img src="android.jpg" align="right" height="275">
+<img src="img/ios.png" align="left" height="275">  |  <img src="img/android.jpg" align="right" height="275">
 
 
 ## Caveats

@@ -24,6 +24,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
   protected float[] mLocations;
   protected int[] mColors;
+  protected boolean mUseViewFrame;
 
   @ReactProp(name = "locations")
   public void setLocations(ReadableArray locations) {
@@ -41,7 +42,6 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
   @ReactProp(name = "colors")
   public void setColors(ReadableArray colors) {
-    Log.d(ReactConstants.TAG, String.valueOf(colors));
     if (colors != null) {
       int[] _colors = new int[colors.size()];
 
@@ -52,6 +52,13 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       mColors = _colors;
       markUpdated();
     }
+  }
+
+  @ReactProp(name = "useViewFrame")
+  public void setUseViewFrame(boolean useViewFrame) {
+    mUseViewFrame = useViewFrame;
+
+    markUpdated();
   }
 
   @Override
@@ -92,7 +99,8 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
         spannableWithGradient(
           (Spannable) getParentFieldValue(this, fieldName),
           this,
-          getLayoutWidth()
+          getLayoutWidth(),
+          getLayoutHeight()
         )
       );  
     }
@@ -102,17 +110,19 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     SpannableStringBuilder builder,
     int start,
     int end,
-    float maxWidth
+    float maxWidth,
+    float maxHeight
   );
 
   protected static Spannable spannableWithGradient(
     Spannable spannable,
     RNShadowTextGradient textCSSNode,
-    float maxWidth
+    float maxWidth,
+    float maxHeight
   ) {
     List<RNSetGradientSpanOperation> ops = new ArrayList<>();
     SpannableStringBuilder gradientBuilder = new SpannableStringBuilder();
-    buildSpannedGradientFromTextCSSNode(textCSSNode, gradientBuilder, ops, maxWidth);
+    buildSpannedGradientFromTextCSSNode(textCSSNode, gradientBuilder, ops, maxWidth, maxHeight);
 
     for (int i = ops.size() - 1; i >= 0; i--) {
     //for (int i = 0; i < ops.size(); i++) {
@@ -126,7 +136,8 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     ReactTextShadowNode textGradientShadowNode,
     SpannableStringBuilder builder,
     List<RNSetGradientSpanOperation> ops,
-    float maxWidth
+    float maxWidth,
+    float maxHeight
   ) {
     int start = builder.length();
 
@@ -137,7 +148,13 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
         builder.append(((ReactRawTextShadowNode) child).getText());
 
       } else if (child instanceof ReactTextShadowNode) {
-        buildSpannedGradientFromTextCSSNode((ReactTextShadowNode) child, builder, ops, maxWidth);
+        buildSpannedGradientFromTextCSSNode(
+          (ReactTextShadowNode) child,
+          builder,
+          ops,
+          maxWidth,
+          maxHeight
+        );
 
       } else if (child instanceof ReactTextInlineImageShadowNode) {
         builder.append(
@@ -151,9 +168,10 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end = builder.length();
 
     if (end >= start && textGradientShadowNode instanceof RNShadowTextGradient) {
-      ops.add(
-        ((RNShadowTextGradient) textGradientShadowNode).createSpan(builder, start, end, maxWidth)
-      );
+      RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
+        .createSpan(builder, start, end, maxWidth, maxHeight);
+
+      ops.add(spanOp);
     }
   }
 

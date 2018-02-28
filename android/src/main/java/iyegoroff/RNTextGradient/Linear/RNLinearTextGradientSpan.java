@@ -22,7 +22,9 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
   private float[] mLocations;
   private float[] mStart;
   private float[] mEnd;
+  private boolean mUseViewFrame;
   private int mMaxWidth;
+  private int mMaxHeight;
   private int mTextStart;
   private int mTextEnd;
   private String mText;
@@ -32,7 +34,9 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     int[] colors,
     float[] start,
     float[] end,
+    boolean useViewFrame,
     float maxWidth,
+    float maxHeight,
     int textStart,
     int textEnd,
     String text
@@ -41,7 +45,9 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     mColors = colors;
     mStart = start;
     mEnd = end;
+    mUseViewFrame = useViewFrame;
     mMaxWidth = (int)maxWidth;
+    mMaxHeight = (int)maxHeight;
     mTextStart = textStart;
     mTextEnd = textEnd;
     mText = text;
@@ -73,16 +79,22 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
 
       Rect rect = isMultiline(paint) ? multiLineTextBounds(paint) : singleLineTextBounds(paint);
 
-      Log.d(ReactConstants.TAG, mText.substring(mTextStart, mTextEnd) + ": "
-      + String.valueOf(rect) + " "
-      + String.valueOf(rect.width()) + " "
-      + String.valueOf(rect.height()));
+      // Log.d(ReactConstants.TAG, mText.substring(mTextStart, mTextEnd) + ": "
+      // + String.valueOf(rect) + " "
+      // + String.valueOf(rect.width()) + " "
+      // + String.valueOf(rect.height()));
+
+      // Log.d(ReactConstants.TAG, "MaxW " + String.valueOf(mMaxWidth) + " width " + String.valueOf(rect.width()));
+      // Log.d(ReactConstants.TAG, "MaxH " + String.valueOf(mMaxHeight) + " height " + String.valueOf(rect.height()));
+
+      int width = mUseViewFrame ? mMaxWidth : rect.width();
+      int height = mUseViewFrame ? mMaxHeight : rect.height();
 
       LinearGradient gradient = new LinearGradient(
-        rect.left + mStart[0] * rect.width(),
-        rect.top + mStart[1] * rect.height(),
-        rect.left + mEnd[0] * rect.width(),
-        rect.top + mEnd[1] * rect.height(),
+        rect.left + mStart[0] * width,
+        rect.top + mStart[1] * height,
+        rect.left + mEnd[0] * width,
+        rect.top + mEnd[1] * height,
         mColors,
         mLocations,
         Shader.TileMode.CLAMP
