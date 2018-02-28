@@ -47,6 +47,9 @@ Optional. If true gradient will be calculated for text view background frame rat
 
 <img src="img/useViewFrame.png" width="300">
 
+
+## Example
+
 ```javascript
 import { LinearTextGradient } from 'react-native-text-gradient';
 
