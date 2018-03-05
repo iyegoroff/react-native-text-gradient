@@ -1,6 +1,6 @@
-#import <Text/RCTShadowText.h>
+#import <Text/Text/RCTTextShadowView.h>
 
-@interface RNShadowTextGradient : RCTShadowText
+@interface RNShadowTextGradient : RCTTextShadowView
 
 @property (nonatomic, copy) NSArray<NSNumber *> *locations;
 @property (nonatomic, copy) NSArray *colors;

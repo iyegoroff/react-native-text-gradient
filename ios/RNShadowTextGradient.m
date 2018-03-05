@@ -1,11 +1,11 @@
 #import <React/RCTConvert.h>
-#import <Text/RCTShadowRawText.h>
-#import <Text/RCTShadowText.h>
+#import <Text/RCTRawTextShadowView.h>
+#import <Text/Text/RCTTextShadowView.h>
 #import "RNTextGradient.h"
 #import "RNGradientValue.h"
 #import "RNShadowTextGradient.h"
 
-@interface RCTShadowText ()
+@interface RCTTextShadowView ()
 
 - (UIEdgeInsets)paddingAsInsets;
 
@@ -102,9 +102,9 @@ NSString *reason = [NSString stringWithFormat:@"Method %@ must be overriden in a
   NSMutableArray<RNGradientValue *> *colors = [NSMutableArray new];
   
   int (^__block iter)(RCTShadowView *, int) = ^(RCTShadowView *view, int textIndex) {
-    if ([view isKindOfClass:[RCTShadowRawText class]]) {
+    if ([view isKindOfClass:[RCTRawTextShadowView class]]) {
       BOOL parentIsGradient = [view.superview isKindOfClass:[RNShadowTextGradient class]];
-      NSString *text = ((RCTShadowRawText *)view).text;
+      NSString *text = ((RCTRawTextShadowView *)view).text;
       
       if (parentIsGradient) {
         RNGradientBlock colorForFrame = ^(CGRect textFrame) {
@@ -118,7 +118,7 @@ NSString *reason = [NSString stringWithFormat:@"Method %@ must be overriden in a
       
       return (int)(textIndex + text.length);
       
-    } else if ([view isKindOfClass:[RCTShadowText class]]) {
+    } else if ([view isKindOfClass:[RCTTextShadowView class]]) {
       int nextTextIndex = textIndex;
       
       if ([view isKindOfClass:[RNShadowTextGradient class]]) {
@@ -179,16 +179,16 @@ NSString *reason = [NSString stringWithFormat:@"Method %@ must be overriden in a
   }
 }
 
-+ (int)textLength:(RCTShadowText *)view
++ (int)textLength:(RCTTextShadowView *)view
 {
   int length = 0;
   
   for (RCTShadowView *subview in view.reactSubviews) {
-    if ([subview isKindOfClass:[RCTShadowRawText class]]) {
-      length += ((RCTShadowRawText *)subview).text.length;
+    if ([subview isKindOfClass:[RCTRawTextShadowView class]]) {
+      length += ((RCTRawTextShadowView *)subview).text.length;
       
-    } else if ([subview isKindOfClass:[RCTShadowText class]]) {
-      length += [RNShadowTextGradient textLength:(RCTShadowText *)subview];
+    } else if ([subview isKindOfClass:[RCTTextShadowView class]]) {
+      length += [RNShadowTextGradient textLength:(RCTTextShadowView *)subview];
     }
   }
   

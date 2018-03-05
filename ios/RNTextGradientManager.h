@@ -1,5 +1,5 @@
-#import <Text/RCTTextManager.h>
+#import <Text/Text/RCTTextViewManager.h>
 
-@interface RNTextGradientManager : RCTTextManager
+@interface RNTextGradientManager : RCTTextViewManager
 
 @end
