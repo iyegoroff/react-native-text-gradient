@@ -2,6 +2,12 @@
 
 //based on this: https://github.com/ViccAlexander/Chameleon/blob/master/Pod/Classes/Objective-C/UIColor%2BChameleon.m
 
+@interface RCTTextShadowView ()
+
+- (void)dirtyLayout;
+
+@end
+
 @implementation RNShadowRadialTextGradient
 
 - (UIColor *)gradientWithFrame:(CGRect)frame
@@ -66,13 +72,13 @@
 - (void)setCenter:(CGPoint)center
 {
   _center = center;
-  [self dirtyText];
+//  [self dirtyLayout];
 }
 
 - (void)setRadius:(CGFloat)radius
 {
   _radius = radius;
-  [self dirtyText];
+//  [self dirtyLayout];
 }
 
 @end

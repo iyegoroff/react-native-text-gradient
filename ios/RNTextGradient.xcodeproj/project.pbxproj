@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		740937021F3FC2B800E9A84E /* RNLinearTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */; };
-		740937051F3FC35400E9A84E /* RNShadowLinearTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */; };
-		740937091F3FE30700E9A84E /* RNShadowRadialTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 740937081F3FE30700E9A84E /* RNShadowRadialTextGradient.m */; };
-		7409370C1F3FE35F00E9A84E /* RNRadialTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */; };
-		741134D41F4119800084A73D /* RNGradientValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 741134D31F4119800084A73D /* RNGradientValue.m */; };
-		7441E35A1F3DE6740007858B /* RNTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441E3591F3DE6740007858B /* RNTextGradient.m */; };
-		7461C09F1F361B2D00BA8FD4 /* RNTextGradientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */; };
-		74D4C0E11F3BABBC00111BA4 /* RNShadowTextGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */; };
+		743353E8205685D500A5042E /* RNTextGradientUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 743353E7205685D500A5042E /* RNTextGradientUtils.m */; };
+		743353EC20568ABE00A5042E /* RNVirtualTextGradientShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743353EB20568ABE00A5042E /* RNVirtualTextGradientShadowView.m */; };
+		743353F0205693AB00A5042E /* RNVirtualTextGradientViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 743353EF205693AA00A5042E /* RNVirtualTextGradientViewManager.m */; };
+		743353F52056A46500A5042E /* RNVirtualLinearTextGradientShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743353F42056A46500A5042E /* RNVirtualLinearTextGradientShadowView.m */; };
+		743353F82056A99000A5042E /* RNLinearGradientUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 743353F72056A99000A5042E /* RNLinearGradientUtils.m */; };
+		7479685620553C4F00E65937 /* RNTextGradientValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7479685520553C4F00E65937 /* RNTextGradientValue.m */; };
+		7479685D2055CDF400E65937 /* RNLinearTextGradientShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7479685C2055CDF400E65937 /* RNLinearTextGradientShadowView.m */; };
+		747968602055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7479685F2055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.m */; };
+		747968632055CEAD00E65937 /* RNLinearTextGradientViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 747968622055CEAD00E65937 /* RNLinearTextGradientViewManager.m */; };
+		74BC8BF8205466D500D327F3 /* RNTextGradientShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BF7205466D500D327F3 /* RNTextGradientShadowView.m */; };
+		74BC8BFB205466EB00D327F3 /* RNTextGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BFA205466EB00D327F3 /* RNTextGradientView.m */; };
+		74BC8BFF2054753800D327F3 /* RNTextGradientViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BFE2054753800D327F3 /* RNTextGradientViewManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,22 +35,36 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNTextGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTextGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		740937001F3FC2B800E9A84E /* RNLinearTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNLinearTextGradientManager.h; sourceTree = "<group>"; };
-		740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNLinearTextGradientManager.m; sourceTree = "<group>"; };
-		740937031F3FC35400E9A84E /* RNShadowLinearTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowLinearTextGradient.h; sourceTree = "<group>"; };
-		740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowLinearTextGradient.m; sourceTree = "<group>"; };
 		740937071F3FE30700E9A84E /* RNShadowRadialTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowRadialTextGradient.h; sourceTree = "<group>"; };
 		740937081F3FE30700E9A84E /* RNShadowRadialTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowRadialTextGradient.m; sourceTree = "<group>"; };
 		7409370A1F3FE35F00E9A84E /* RNRadialTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNRadialTextGradientManager.h; sourceTree = "<group>"; };
 		7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNRadialTextGradientManager.m; sourceTree = "<group>"; };
-		741134D21F4119800084A73D /* RNGradientValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGradientValue.h; sourceTree = "<group>"; };
-		741134D31F4119800084A73D /* RNGradientValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGradientValue.m; sourceTree = "<group>"; };
-		7441E3581F3DE6740007858B /* RNTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNTextGradient.h; sourceTree = "<group>"; };
-		7441E3591F3DE6740007858B /* RNTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTextGradient.m; sourceTree = "<group>"; };
-		7461C09D1F361B2D00BA8FD4 /* RNTextGradientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNTextGradientManager.h; sourceTree = "<group>"; };
-		7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientManager.m; sourceTree = "<group>"; };
-		74D4C0DF1F3BABBB00111BA4 /* RNShadowTextGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNShadowTextGradient.h; sourceTree = "<group>"; };
-		74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNShadowTextGradient.m; sourceTree = "<group>"; };
+		743353E6205685D500A5042E /* RNTextGradientUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientUtils.h; sourceTree = "<group>"; };
+		743353E7205685D500A5042E /* RNTextGradientUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientUtils.m; sourceTree = "<group>"; };
+		743353EA20568ABE00A5042E /* RNVirtualTextGradientShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVirtualTextGradientShadowView.h; sourceTree = "<group>"; };
+		743353EB20568ABE00A5042E /* RNVirtualTextGradientShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVirtualTextGradientShadowView.m; sourceTree = "<group>"; };
+		743353ED20568F3E00A5042E /* RNTextGradientShadowViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientShadowViewDelegate.h; sourceTree = "<group>"; };
+		743353EE205693AA00A5042E /* RNVirtualTextGradientViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVirtualTextGradientViewManager.h; sourceTree = "<group>"; };
+		743353EF205693AA00A5042E /* RNVirtualTextGradientViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVirtualTextGradientViewManager.m; sourceTree = "<group>"; };
+		743353F32056A46500A5042E /* RNVirtualLinearTextGradientShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVirtualLinearTextGradientShadowView.h; sourceTree = "<group>"; };
+		743353F42056A46500A5042E /* RNVirtualLinearTextGradientShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVirtualLinearTextGradientShadowView.m; sourceTree = "<group>"; };
+		743353F62056A99000A5042E /* RNLinearGradientUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNLinearGradientUtils.h; sourceTree = "<group>"; };
+		743353F72056A99000A5042E /* RNLinearGradientUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNLinearGradientUtils.m; sourceTree = "<group>"; };
+		743353FB2056AAB400A5042E /* RNLinearTextGradientShadowViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNLinearTextGradientShadowViewDelegate.h; sourceTree = "<group>"; };
+		7479685420553C4F00E65937 /* RNTextGradientValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientValue.h; sourceTree = "<group>"; };
+		7479685520553C4F00E65937 /* RNTextGradientValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientValue.m; sourceTree = "<group>"; };
+		7479685B2055CDF400E65937 /* RNLinearTextGradientShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNLinearTextGradientShadowView.h; sourceTree = "<group>"; };
+		7479685C2055CDF400E65937 /* RNLinearTextGradientShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNLinearTextGradientShadowView.m; sourceTree = "<group>"; };
+		7479685E2055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVirtualLinearTextGradientViewManager.h; sourceTree = "<group>"; };
+		7479685F2055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVirtualLinearTextGradientViewManager.m; sourceTree = "<group>"; };
+		747968612055CEAD00E65937 /* RNLinearTextGradientViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNLinearTextGradientViewManager.h; sourceTree = "<group>"; };
+		747968622055CEAD00E65937 /* RNLinearTextGradientViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNLinearTextGradientViewManager.m; sourceTree = "<group>"; };
+		74BC8BF6205466D500D327F3 /* RNTextGradientShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientShadowView.h; sourceTree = "<group>"; };
+		74BC8BF7205466D500D327F3 /* RNTextGradientShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientShadowView.m; sourceTree = "<group>"; };
+		74BC8BF9205466EB00D327F3 /* RNTextGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientView.h; sourceTree = "<group>"; };
+		74BC8BFA205466EB00D327F3 /* RNTextGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientView.m; sourceTree = "<group>"; };
+		74BC8BFD2054753800D327F3 /* RNTextGradientViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTextGradientViewManager.h; sourceTree = "<group>"; };
+		74BC8BFE2054753800D327F3 /* RNTextGradientViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTextGradientViewManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,37 +89,13 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				740937061F3FE2C700E9A84E /* Radial */,
-				740936FF1F3FC26900E9A84E /* Linear */,
-				740936FE1F3FC23500E9A84E /* Base */,
+				74BC8BF5205466B800D327F3 /* TextGradient */,
+				747968572055CD7000E65937 /* LinearTextGradient */,
+				7479685420553C4F00E65937 /* RNTextGradientValue.h */,
+				7479685520553C4F00E65937 /* RNTextGradientValue.m */,
+				74BC8BE62054636800D327F3 /* old */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		740936FE1F3FC23500E9A84E /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				7441E3581F3DE6740007858B /* RNTextGradient.h */,
-				7441E3591F3DE6740007858B /* RNTextGradient.m */,
-				74D4C0DF1F3BABBB00111BA4 /* RNShadowTextGradient.h */,
-				74D4C0E01F3BABBB00111BA4 /* RNShadowTextGradient.m */,
-				7461C09D1F361B2D00BA8FD4 /* RNTextGradientManager.h */,
-				7461C09E1F361B2D00BA8FD4 /* RNTextGradientManager.m */,
-				741134D21F4119800084A73D /* RNGradientValue.h */,
-				741134D31F4119800084A73D /* RNGradientValue.m */,
-			);
-			name = Base;
-			sourceTree = "<group>";
-		};
-		740936FF1F3FC26900E9A84E /* Linear */ = {
-			isa = PBXGroup;
-			children = (
-				740937031F3FC35400E9A84E /* RNShadowLinearTextGradient.h */,
-				740937041F3FC35400E9A84E /* RNShadowLinearTextGradient.m */,
-				740937001F3FC2B800E9A84E /* RNLinearTextGradientManager.h */,
-				740937011F3FC2B800E9A84E /* RNLinearTextGradientManager.m */,
-			);
-			name = Linear;
 			sourceTree = "<group>";
 		};
 		740937061F3FE2C700E9A84E /* Radial */ = {
@@ -113,6 +107,68 @@
 				7409370B1F3FE35F00E9A84E /* RNRadialTextGradientManager.m */,
 			);
 			name = Radial;
+			sourceTree = "<group>";
+		};
+		743353F92056A9C400A5042E /* VirtualTextGradient */ = {
+			isa = PBXGroup;
+			children = (
+				743353EE205693AA00A5042E /* RNVirtualTextGradientViewManager.h */,
+				743353EF205693AA00A5042E /* RNVirtualTextGradientViewManager.m */,
+				743353EA20568ABE00A5042E /* RNVirtualTextGradientShadowView.h */,
+				743353EB20568ABE00A5042E /* RNVirtualTextGradientShadowView.m */,
+			);
+			name = VirtualTextGradient;
+			sourceTree = "<group>";
+		};
+		743353FA2056A9EB00A5042E /* VirtualLinearTextGradient */ = {
+			isa = PBXGroup;
+			children = (
+				7479685E2055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.h */,
+				7479685F2055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.m */,
+				743353F32056A46500A5042E /* RNVirtualLinearTextGradientShadowView.h */,
+				743353F42056A46500A5042E /* RNVirtualLinearTextGradientShadowView.m */,
+			);
+			name = VirtualLinearTextGradient;
+			sourceTree = "<group>";
+		};
+		747968572055CD7000E65937 /* LinearTextGradient */ = {
+			isa = PBXGroup;
+			children = (
+				743353FA2056A9EB00A5042E /* VirtualLinearTextGradient */,
+				747968612055CEAD00E65937 /* RNLinearTextGradientViewManager.h */,
+				747968622055CEAD00E65937 /* RNLinearTextGradientViewManager.m */,
+				7479685B2055CDF400E65937 /* RNLinearTextGradientShadowView.h */,
+				7479685C2055CDF400E65937 /* RNLinearTextGradientShadowView.m */,
+				743353F62056A99000A5042E /* RNLinearGradientUtils.h */,
+				743353F72056A99000A5042E /* RNLinearGradientUtils.m */,
+				743353FB2056AAB400A5042E /* RNLinearTextGradientShadowViewDelegate.h */,
+			);
+			name = LinearTextGradient;
+			sourceTree = "<group>";
+		};
+		74BC8BE62054636800D327F3 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				740937061F3FE2C700E9A84E /* Radial */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
+		74BC8BF5205466B800D327F3 /* TextGradient */ = {
+			isa = PBXGroup;
+			children = (
+				743353F92056A9C400A5042E /* VirtualTextGradient */,
+				74BC8BFD2054753800D327F3 /* RNTextGradientViewManager.h */,
+				74BC8BFE2054753800D327F3 /* RNTextGradientViewManager.m */,
+				74BC8BF6205466D500D327F3 /* RNTextGradientShadowView.h */,
+				74BC8BF7205466D500D327F3 /* RNTextGradientShadowView.m */,
+				74BC8BF9205466EB00D327F3 /* RNTextGradientView.h */,
+				74BC8BFA205466EB00D327F3 /* RNTextGradientView.m */,
+				743353E6205685D500A5042E /* RNTextGradientUtils.h */,
+				743353E7205685D500A5042E /* RNTextGradientUtils.m */,
+				743353ED20568F3E00A5042E /* RNTextGradientShadowViewDelegate.h */,
+			);
+			name = TextGradient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,14 +227,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74D4C0E11F3BABBC00111BA4 /* RNShadowTextGradient.m in Sources */,
-				7441E35A1F3DE6740007858B /* RNTextGradient.m in Sources */,
-				7409370C1F3FE35F00E9A84E /* RNRadialTextGradientManager.m in Sources */,
-				740937051F3FC35400E9A84E /* RNShadowLinearTextGradient.m in Sources */,
-				740937091F3FE30700E9A84E /* RNShadowRadialTextGradient.m in Sources */,
-				7461C09F1F361B2D00BA8FD4 /* RNTextGradientManager.m in Sources */,
-				740937021F3FC2B800E9A84E /* RNLinearTextGradientManager.m in Sources */,
-				741134D41F4119800084A73D /* RNGradientValue.m in Sources */,
+				743353F82056A99000A5042E /* RNLinearGradientUtils.m in Sources */,
+				743353F52056A46500A5042E /* RNVirtualLinearTextGradientShadowView.m in Sources */,
+				743353EC20568ABE00A5042E /* RNVirtualTextGradientShadowView.m in Sources */,
+				74BC8BFF2054753800D327F3 /* RNTextGradientViewManager.m in Sources */,
+				74BC8BF8205466D500D327F3 /* RNTextGradientShadowView.m in Sources */,
+				7479685D2055CDF400E65937 /* RNLinearTextGradientShadowView.m in Sources */,
+				7479685620553C4F00E65937 /* RNTextGradientValue.m in Sources */,
+				743353F0205693AB00A5042E /* RNVirtualTextGradientViewManager.m in Sources */,
+				743353E8205685D500A5042E /* RNTextGradientUtils.m in Sources */,
+				747968602055CE1900E65937 /* RNVirtualLinearTextGradientViewManager.m in Sources */,
+				74BC8BFB205466EB00D327F3 /* RNTextGradientView.m in Sources */,
+				747968632055CEAD00E65937 /* RNLinearTextGradientViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,10 +327,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../react-native/Libraries",
-					"$(SRCROOT)/../../../../node_modules/React",
-					"$(SRCROOT)/../../../node_modules/react-native/React",
-					"$(SRCROOT)/../../../node_modules/react-native/Libraries",
+					"$(SRCROOT)/../../react-native/Libraries/**",
+					"$(SRCROOT)/../../../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../node_modules/react-native/Libraries/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -287,10 +346,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../react-native/Libraries",
-					"$(SRCROOT)/../../../../node_modules/React",
-					"$(SRCROOT)/../../../node_modules/react-native/React",
-					"$(SRCROOT)/../../../node_modules/react-native/Libraries",
+					"$(SRCROOT)/../../react-native/Libraries/**",
+					"$(SRCROOT)/../../../node_modules/react-native/React/**",
+					"$(SRCROOT)/../../../node_modules/react-native/Libraries/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";

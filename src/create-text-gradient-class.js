@@ -19,8 +19,8 @@ import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
 import createReactNativeComponentClass from 'react-native/Libraries/Renderer/shims/createReactNativeComponentClass';
-import { ColorPropType, EdgeInsetsPropType, NativeMethodsMixin, Platform } from 'react-native';
-import { Touchable, processColor, Dimensions } from 'react-native';
+import { ColorPropType, EdgeInsetsPropType, NativeMethodsMixin } from 'react-native';
+import { Touchable, processColor, Dimensions, UIManager } from 'react-native';
 
 const stylePropType = StyleSheetPropType(TextStylePropTypes);
 
@@ -54,120 +54,118 @@ const createTextGradientClass = (
     uiViewClassName,
   };
 
+  /**
+ * A React component for displaying text.
+ *
+ * See https://facebook.github.io/react-native/docs/text.html
+ */
+
   const TextGradient = createReactClass({
-    displayName: 'TextGradient',
+    displayName: uiViewClassName,
     propTypes: {
       /**
-       * When `numberOfLines` is set, this prop defines how text will be truncated.
-       * `numberOfLines` must be set in conjunction with this prop.
+       * When `numberOfLines` is set, this prop defines how text will be
+       * truncated.
        *
-       * This can be one of the following values:
-       *
-       * - `head` - The line is displayed so that the end fits in the container and the missing text
-       * at the beginning of the line is indicated by an ellipsis glyph. e.g., "...wxyz"
-       * - `middle` - The line is displayed so that the beginning and end fit in the container and the
-       * missing text in the middle is indicated by an ellipsis glyph. "ab...yz"
-       * - `tail` - The line is displayed so that the beginning fits in the container and the
-       * missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
-       * - `clip` - Lines are not drawn past the edge of the text container.
-       *
-       * The default is `tail`.
-       *
-       * > `clip` is working only for iOS
+       * See https://facebook.github.io/react-native/docs/text.html#ellipsizemode
        */
       ellipsizeMode: PropTypes.oneOf(['head', 'middle', 'tail', 'clip']),
       /**
-       * Used to truncate the text with an ellipsis after computing the text
-       * layout, including line wrapping, such that the total number of lines
-       * does not exceed this number.
+       * Used to truncate the text with an ellipsis.
        *
-       * This prop is commonly used with `ellipsizeMode`.
+       * See https://facebook.github.io/react-native/docs/text.html#numberoflines
        */
       numberOfLines: PropTypes.number,
       /**
-       * Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced`
-       * The default value is `highQuality`.
-       * @platform android
+       * Set text break strategy on Android.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#textbreakstrategy
        */
       textBreakStrategy: PropTypes.oneOf(['simple', 'highQuality', 'balanced']),
       /**
-       * Invoked on mount and layout changes with
+       * Invoked on mount and layout changes.
        *
-       *   `{nativeEvent: {layout: {x, y, width, height}}}`
+       * See https://facebook.github.io/react-native/docs/text.html#onlayout
        */
       onLayout: PropTypes.func,
       /**
        * This function is called on press.
        *
-       * e.g., `onPress={() => console.log('1st')}`
+       * See https://facebook.github.io/react-native/docs/text.html#onpress
        */
       onPress: PropTypes.func,
       /**
        * This function is called on long press.
        *
-       * e.g., `onLongPress={this.increaseSize}>`
+       * See https://facebook.github.io/react-native/docs/text.html#onlongpress
        */
       onLongPress: PropTypes.func,
       /**
-       * When the scroll view is disabled, this defines how far your touch may
-       * move off of the button, before deactivating the button. Once deactivated,
-       * try moving it back and you'll see that the button is once again
-       * reactivated! Move it back and forth several times while the scroll view
-       * is disabled. Ensure you pass in a constant to reduce memory allocations.
+       * Defines how far your touch may move off of the button, before
+       * deactivating the button.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#pressretentionoffset
        */
       pressRetentionOffset: EdgeInsetsPropType,
       /**
-       * Lets the user select text, to use the native copy and paste functionality.
+       * Lets the user select text.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#selectable
        */
       selectable: PropTypes.bool,
       /**
        * The highlight color of the text.
-       * @platform android
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#selectioncolor
        */
       selectionColor: ColorPropType,
       /**
-       * When `true`, no visual change is made when text is pressed down. By
-       * default, a gray oval highlights the text on press down.
-       * @platform ios
+       * When `true`, no visual change is made when text is pressed down.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#supperhighlighting
        */
       suppressHighlighting: PropTypes.bool,
       style: stylePropType,
       /**
        * Used to locate this view in end-to-end tests.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#testid
        */
       testID: PropTypes.string,
       /**
        * Used to locate this view from native code.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#nativeid
        */
       nativeID: PropTypes.string,
       /**
-       * Specifies whether fonts should scale to respect Text Size accessibility settings. The
-       * default is `true`.
+       * Whether fonts should scale to respect Text Size accessibility settings.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#allowfontscaling
        */
       allowFontScaling: PropTypes.bool,
       /**
-       * When set to `true`, indicates that the view is an accessibility element. The default value
-       * for a `Text` element is `true`.
+       * Indicates whether the view is an accessibility element.
        *
-       * See the
-       * [Accessibility guide](docs/accessibility.html#accessible-ios-android)
-       * for more information.
+       * See https://facebook.github.io/react-native/docs/text.html#accessible
        */
       accessible: PropTypes.bool,
       /**
-       * Specifies whether font should be scaled down automatically to fit given style constraints.
-       * @platform ios
+       * Whether font should be scaled down automatically.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#adjustsfontsizetofit
        */
       adjustsFontSizeToFit: PropTypes.bool,
-
       /**
-       * Specifies smallest possible scale a font can reach when adjustsFontSizeToFit is enabled. (values 0.01-1.0).
-       * @platform ios
+       * Smallest possible scale a font can reach.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#minimumfontscale
        */
       minimumFontScale: PropTypes.number,
       /**
-       * Specifies the disabled state of the text view for testing purposes
-       * @platform android
+       * Specifies the disabled state of the text view for testing purposes.
+       *
+       * See https://facebook.github.io/react-native/docs/text.html#disabled
        */
       disabled: PropTypes.bool,
     },
@@ -186,7 +184,9 @@ const createTextGradientClass = (
     mixins: [NativeMethodsMixin],
     viewConfig: viewConfig,
     getChildContext() {
-      return { isInAParentText: true };
+      return {
+        isInAParentText: true,
+      };
     },
     childContextTypes: {
       isInAParentText: PropTypes.bool
@@ -215,11 +215,13 @@ const createTextGradientClass = (
         ...defaultProps,
         ...this.props,
       });
+
       if (this.props.onStartShouldSetResponder || this._hasPressHandler()) {
         if (!this._handlers) {
           this._handlers = {
             onStartShouldSetResponder: () => {
-              const shouldSetFromProps = this.props.onStartShouldSetResponder &&
+              const shouldSetFromProps =
+                this.props.onStartShouldSetResponder &&
                 // $FlowFixMe(>=0.41.0)
                 this.props.onStartShouldSetResponder();
               const setResponder = shouldSetFromProps || this._hasPressHandler();
@@ -232,7 +234,10 @@ const createTextGradientClass = (
                   }
                 }
                 this.touchableHandleActivePressIn = () => {
-                  if (this.props.suppressHighlighting || !this._hasPressHandler()) {
+                  if (
+                    this.props.suppressHighlighting ||
+                    !this._hasPressHandler()
+                  ) {
                     return;
                   }
                   this.setState({
@@ -241,7 +246,10 @@ const createTextGradientClass = (
                 };
 
                 this.touchableHandleActivePressOut = () => {
-                  if (this.props.suppressHighlighting || !this._hasPressHandler()) {
+                  if (
+                    this.props.suppressHighlighting ||
+                    !this._hasPressHandler()
+                  ) {
                     return;
                   }
                   this.setState({
@@ -288,7 +296,10 @@ const createTextGradientClass = (
               // the request
               var allowTermination = this.touchableHandleResponderTerminationRequest();
               if (allowTermination && this.props.onResponderTerminationRequest) {
-                allowTermination = this.props.onResponderTerminationRequest.apply(this, arguments);
+                allowTermination = this.props.onResponderTerminationRequest.apply(
+                  this,
+                  arguments,
+                );
               }
               return allowTermination;
             }.bind(this),
@@ -300,21 +311,14 @@ const createTextGradientClass = (
           isHighlighted: this.state.isHighlighted,
         };
       }
-
       newProps = {
         ...newProps,
         style: [{ color: 'gray' }, newProps.style],
       };
-
-      newProps.style = [
-        { color: 'gray' },
-        newProps.style
-      ];
-
       if (newProps.selectionColor != null) {
         newProps = {
           ...newProps,
-          selectionColor: processColor(newProps.selectionColor)
+          selectionColor: processColor(newProps.selectionColor),
         };
       }
       if (newProps.colors != null) {
@@ -334,7 +338,7 @@ const createTextGradientClass = (
       } else {
         return <RNTextGradient {...newProps} />;
       }
-    }
+    },
   });
 
   var PRESS_RECT_OFFSET = {
@@ -350,7 +354,7 @@ const createTextGradientClass = (
   );
   var RNVirtualTextGradient = RNTextGradient;
 
-  if (Platform.OS === 'android') {
+  if (UIManager[uiVirtualViewClassName]) {
     RNVirtualTextGradient = createReactNativeComponentClass(
       uiVirtualViewClassName,
       () => ({
@@ -358,13 +362,13 @@ const createTextGradientClass = (
           isHighlighted: true,
           colors: true,
           locations: true,
+          useGlobalCache: true,
           ...defaultPropAttributes
         }),
         uiViewClassName: uiVirtualViewClassName
       })
     );
   }
-
 
   return TextGradient;
 };

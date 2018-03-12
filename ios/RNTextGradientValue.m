@@ -1,10 +1,10 @@
-#import "RNGradientValue.h"
+#import "RNTextGradientValue.h"
 
-@implementation RNGradientValue
+@implementation RNTextGradientValue
 
 - (instancetype)initWithRange:(NSRange)range
                     isRawText:(BOOL)isRawText
-                colorForFrame:(RNGradientBlock)colorForFrame
+                colorForFrame:(RNTextGradientBlock)colorForFrame
 {
   if ((self = [super init])) {
     self.range = range;
@@ -16,3 +16,4 @@
 }
 
 @end
+

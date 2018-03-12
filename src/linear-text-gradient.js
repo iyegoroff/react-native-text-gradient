@@ -5,18 +5,16 @@ export default createTextGradientClass(
   'RNLinearTextGradient',
   'RNVirtualLinearTextGradient',
   {
-    start: { x: 0, y: 0 },
-    end: { x: 1, y: 0 }
+    gradientStart: { x: 0, y: 0 },
+    gradientEnd: { x: 1, y: 0 }
   },
-  (props) => {
-    if (Platform.OS === 'android') {
-      return {
-        ...props,
-        start: [props.start.x, props.start.y],
-        end: [props.end.x, props.end.y],
-      }
-    }
+  ({ start, end, ...props }) => {
+    const isAndroid = Platform.OS === 'android';
 
-    return props;
+    return {
+      ...props,
+      gradientStart: isAndroid ? [start.x, start.y] : start,
+      gradientEnd: isAndroid ? [end.x, end.y] : end,
+    }
   }
 );

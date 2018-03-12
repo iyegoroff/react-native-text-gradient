@@ -19,7 +19,7 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
   private float[] mStart;
   private float[] mEnd;
 
-  @ReactProp(name = "start")
+  @ReactProp(name = "gradientStart")
   public void setStart(ReadableArray start) {
     if (start != null) {
       mStart = new float[] {
@@ -31,7 +31,7 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     }
   }
 
-  @ReactProp(name = "end")
+  @ReactProp(name = "gradientEnd")
   public void setEnd(ReadableArray end) {
     if (end != null) {
       mEnd = new float[] {
