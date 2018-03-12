@@ -26,7 +26,8 @@ React-Native text gradient component for iOS & Android.
 - React-Native:
   - 0.0.3 supports rn >= 0.50.0;
   - rn 0.53.0 is not supported;
-  - 0.0.4 supports rn >= 0.53.1.
+  - 0.0.4 supports rn >= 0.53.1;
+  - rn >= 0.54.0 is not supported yet. 
 
 
 ## Example
