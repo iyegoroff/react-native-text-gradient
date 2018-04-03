@@ -168,10 +168,11 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end = builder.length();
 
     if (end >= start && textGradientShadowNode instanceof RNShadowTextGradient) {
-      RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
-        .createSpan(builder, start, end, maxWidth, maxHeight);
-
-      ops.add(spanOp);
+//      RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
+//        .createSpan(builder, start, end, maxWidth, maxHeight);
+//
+//      ops.add(spanOp);
+      ops.add(new RNSetGradientSpanOperation(start, end, new RNMeasureSizeSpan()));
     }
   }
 
