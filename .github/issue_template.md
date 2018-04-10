@@ -1,3 +1,1 @@
-react-native: <strong>specify version here</strong>
-
-react-native-text-gradient: <strong>specify version here</strong>
+Please specify your react-native and react-native-text-gradient versions.
