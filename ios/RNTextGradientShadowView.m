@@ -91,7 +91,7 @@
           CGRect actualFrame;
           
           if ([gradientView useViewFrame]) {
-            CGRect viewFrame = [gradientView frame];
+            CGRect viewFrame = gradientView.layoutMetrics.frame;
             actualFrame = CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height);
             
           } else {
