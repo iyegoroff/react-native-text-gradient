@@ -1,6 +1,7 @@
 package iyegoroff.RNTextGradient;
 
 import com.facebook.react.views.text.ReactTextShadowNode;
+import com.facebook.react.views.text.ReactBaseTextShadowNode;
 import com.facebook.react.views.text.ReactRawTextShadowNode;
 import com.facebook.react.views.text.ReactTextInlineImageShadowNode;
 import com.facebook.react.uimanager.ReactShadowNode;
@@ -12,13 +13,11 @@ import java.lang.reflect.Field;
 import android.util.Log;
 import com.facebook.react.common.ReactConstants;
 import java.lang.String;
-import java.util.Arrays;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import com.facebook.react.uimanager.UIViewOperationQueue;
-import android.view.OrientationEventListener;
 
 public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
@@ -36,8 +35,12 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       }
 
       mLocations = _locations;
-      markUpdated();
+      
+    } else {
+      mLocations = null;
     }
+
+    markUpdated();
   }
 
   @ReactProp(name = "colors")
@@ -50,8 +53,12 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       }
 
       mColors = _colors;
-      markUpdated();
+
+    } else {
+      mColors = null;
     }
+
+    markUpdated();    
   }
 
   @ReactProp(name = "useViewFrame")
@@ -111,7 +118,8 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int start,
     int end,
     float maxWidth,
-    float maxHeight
+    float maxHeight,
+    float lineHeight
   );
 
   protected static Spannable spannableWithGradient(
@@ -133,7 +141,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
   }
 
   protected static void buildSpannedGradientFromTextCSSNode(
-    ReactTextShadowNode textGradientShadowNode,
+    ReactBaseTextShadowNode textGradientShadowNode,
     SpannableStringBuilder builder,
     List<RNSetGradientSpanOperation> ops,
     float maxWidth,
@@ -147,9 +155,9 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       if (child instanceof ReactRawTextShadowNode) {
         builder.append(((ReactRawTextShadowNode) child).getText());
 
-      } else if (child instanceof ReactTextShadowNode) {
+      } else if (child instanceof ReactBaseTextShadowNode) {
         buildSpannedGradientFromTextCSSNode(
-          (ReactTextShadowNode) child,
+          (ReactBaseTextShadowNode) child,
           builder,
           ops,
           maxWidth,
@@ -168,11 +176,11 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end = builder.length();
 
     if (end >= start && textGradientShadowNode instanceof RNShadowTextGradient) {
-//      RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
-//        .createSpan(builder, start, end, maxWidth, maxHeight);
-//
-//      ops.add(spanOp);
-      ops.add(new RNSetGradientSpanOperation(start, end, new RNMeasureSizeSpan()));
+      float lineHeight = textGradientShadowNode.getEffectiveLineHeight();
+      RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
+        .createSpan(builder, start, end, maxWidth, maxHeight, lineHeight);
+
+     ops.add(spanOp);
     }
   }
 

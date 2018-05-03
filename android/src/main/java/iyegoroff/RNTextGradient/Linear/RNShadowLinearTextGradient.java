@@ -49,7 +49,8 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     int start,
     int end,
     float maxWidth,
-    float maxHeight
+    float maxHeight,
+    float lineHeight
   ) {
     RNLinearTextGradientSpan span = new RNLinearTextGradientSpan(
       mLocations,
@@ -61,7 +62,8 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
       maxHeight,
       start,
       end,
-      builder.toString()
+      builder.toString(),
+      lineHeight
     );
 
     return new RNSetGradientSpanOperation(start, end, span);

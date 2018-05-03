@@ -14,10 +14,18 @@ import com.facebook.react.common.ReactConstants;
 import com.facebook.yoga.YogaConstants;
 import android.graphics.Rect;
 import java.lang.Math;
-import android.text.StaticLayout;
-import android.text.Layout;
+import android.graphics.Paint.FontMetrics;
 
 public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAppearance {
+  class TextBounds {
+    public float top;
+    public float bottom;
+    public float left;
+    public float right;
+    public float width;
+    public float height;
+  }
+
   private int[] mColors;
   private float[] mLocations;
   private float[] mStart;
@@ -28,6 +36,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
   private int mTextStart;
   private int mTextEnd;
   private String mText;
+  private float mLineHeight;
 
   public RNLinearTextGradientSpan(
     float[] locations,
@@ -39,7 +48,8 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     float maxHeight,
     int textStart,
     int textEnd,
-    String text
+    String text,
+    float lineHeight
   ) {
     mLocations = locations;
     mColors = colors;
@@ -51,6 +61,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     mTextStart = textStart;
     mTextEnd = textEnd;
     mText = text;
+    mLineHeight = lineHeight;
   }
 
   @Override
@@ -62,39 +73,38 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
       mText != null &&
       !YogaConstants.isUndefined(mMaxWidth)
     ) {
-      // Rect textRect = new Rect();
-      // paint.getTextBounds(mText, 0, mTextStart, textRect);
-      // paint.getTextBounds(mText, mTextStart, mTextEnd, textRect);
+      float lineHeight = (int) Math.ceil(Float.isNaN(mLineHeight) ? paint.getFontSpacing() : mLineHeight);
 
-      // StaticLayout layout = new StaticLayout(mText, paint, (int) Math.ceil(mMaxWidth), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, true);
-      // float width = Math.min(textRect.width(), layout.getWidth());
-      // float height = layout.getHeight();
-      // Log.d(ReactConstants.TAG, mText + " w-" + String.valueOf(width) + " h-" + String.valueOf(height));
-      // // Log.d(ReactConstants.TAG, "s " + String.valueOf(mTextStart) + "e " + String.valueOf(mTextEnd) + "multi " + String.valueOf(isMultiline(paint)));
-      // if (isMultiline(paint)) {
-      //   Log.d(ReactConstants.TAG, "multi " + String.valueOf(multiLineTextBounds(paint)));
-      // } else {
-      //   Log.d(ReactConstants.TAG, "single " + String.valueOf(singleLineTextBounds(paint)));
-      // }
+      TextBounds rectBeforeGradient = textBounds(
+        mText.substring(0, mTextStart),
+        paint,
+        0,
+        0,
+        lineHeight
+      );
 
-      Rect rect = isMultiline(paint) ? multiLineTextBounds(paint) : singleLineTextBounds(paint);
+      TextBounds gradientRect = textBounds(
+        mText.substring(mTextStart, mTextEnd),
+        paint,
+        rectBeforeGradient.right,
+        rectBeforeGradient.bottom - lineHeight,
+        lineHeight
+      );
 
-      // Log.d(ReactConstants.TAG, mText.substring(mTextStart, mTextEnd) + ": "
-      // + String.valueOf(rect) + " "
-      // + String.valueOf(rect.width()) + " "
-      // + String.valueOf(rect.height()));
+      float width = mUseViewFrame ? mMaxWidth : gradientRect.width;
+      float height = mUseViewFrame ? mMaxHeight : gradientRect.height;
 
-      // Log.d(ReactConstants.TAG, "MaxW " + String.valueOf(mMaxWidth) + " width " + String.valueOf(rect.width()));
-      // Log.d(ReactConstants.TAG, "MaxH " + String.valueOf(mMaxHeight) + " height " + String.valueOf(rect.height()));
-
-      int width = mUseViewFrame ? mMaxWidth : rect.width();
-      int height = mUseViewFrame ? mMaxHeight : rect.height();
+      // Log.d(ReactConstants.TAG, "before: 0 - " + String.valueOf(mTextStart) + " " + textBoundsAsString(rectBeforeGradient));
+      // Log.d(ReactConstants.TAG, "gradient: " + String.valueOf(mTextStart) + " - " + String.valueOf(mTextEnd) + " " + textBoundsAsString(gradientRect));
+      // Log.d(ReactConstants.TAG, "width " + String.valueOf(width) + " height " + String.valueOf(height));
+      // Log.d(ReactConstants.TAG, "lineHeight " + String.valueOf(lineHeight) + " spacing " + String.valueOf(paint.getFontSpacing()));
+      // Log.d(ReactConstants.TAG, "text " + mText);
 
       LinearGradient gradient = new LinearGradient(
-        rect.left + mStart[0] * width,
-        rect.top + mStart[1] * height,
-        rect.left + mEnd[0] * width,
-        rect.top + mEnd[1] * height,
+        gradientRect.left + mStart[0] * width,
+        gradientRect.top + mStart[1] * height,
+        gradientRect.left + mEnd[0] * width,
+        gradientRect.top + mEnd[1] * height,
         mColors,
         mLocations,
         Shader.TileMode.CLAMP
@@ -105,54 +115,47 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     }
   }
 
-  private boolean isMultiline(TextPaint paint) {
-    float x = rawPreviousTextBounds(paint).width() % mMaxWidth;
+  // private String textBoundsAsString(TextBounds bounds) {
+  //   return "TextBounds(t: " + bounds.top + " l: " + bounds.left + " b: " + bounds.bottom + " r: " + bounds.right + " h: " + bounds.height + " w: " + bounds.width + " )";
+  // }
 
-    return (rawTextBounds(paint).width() + x) > mMaxWidth;
-  }
+  private TextBounds textBounds(String text, Paint paint, float startX, float startY, float lineHeight) {
+    TextBounds bounds = new TextBounds();
+    bounds.left = startX;
+    bounds.right = startX;
+    bounds.top = startY;
+    bounds.bottom = startY + lineHeight;
+    bounds.width = 0;
+    bounds.height = lineHeight;
 
-  private Rect singleLineTextBounds(TextPaint paint) {
-    Rect rawBounds = rawTextBounds(paint);
-    Rect rawPrevBounds = rawPreviousTextBounds(paint);
-    int lineHeight = rawBounds.height();
+    int lineStart = 0;
+    int lineEnd = 1;
+    float lineOffset = startX;
 
-    int left = rawPrevBounds.width();
-    int top = (left / mMaxWidth) * lineHeight;
-    int right = (left + rawBounds.width());
-    int bottom = (int)Math.ceil((float)right / (float)mMaxWidth) * lineHeight;
+    while (lineEnd <= text.length()) {
+      float lineWidth = paint.measureText(mText, lineStart, lineEnd) + lineOffset;
+  
+      if (lineWidth > mMaxWidth) {  
+        if (lineEnd == 1) {
+          bounds.top += lineHeight;
+          bounds.left = 0;
+        } else {
+          bounds.width = Math.max(lineWidth, bounds.width);
+        }
 
-    return new Rect(
-      left % mMaxWidth,
-      top,
-      right % mMaxWidth == 0 ? right : right % mMaxWidth,
-      bottom
-    );
-  }
+        lineStart = lineEnd - 1;
+        lineOffset = 0;
+        bounds.bottom += lineHeight;
+        bounds.right = 0;
+        bounds.height += lineHeight;
+        bounds.left = 0;
+      } else {
+        lineEnd++;
+        bounds.right = lineWidth;
+        bounds.width = Math.max(lineWidth - lineOffset, bounds.width);
+      }
+    }
 
-  private Rect multiLineTextBounds(TextPaint paint) {
-    Rect rawBounds = rawTextBounds(paint);
-    Rect rawPrevBounds = rawPreviousTextBounds(paint);
-    int lineHeight = rawBounds.height();
-
-    int left = 0;
-    int top = (rawPrevBounds.width() / mMaxWidth) * lineHeight;
-    int right = mMaxWidth;
-    int bottom = (int)Math.ceil((float)(rawPrevBounds.width() + rawBounds.width()) / (float)mMaxWidth) * lineHeight;
-
-    return new Rect(left, top, right, bottom);
-  }
-
-  private Rect rawPreviousTextBounds(TextPaint paint) {
-    Rect textRect = new Rect();
-    paint.getTextBounds(mText, 0, mTextStart, textRect);
-
-    return textRect;
-  }
-
-  private Rect rawTextBounds(TextPaint paint) {
-    Rect textRect = new Rect();
-    paint.getTextBounds(mText, mTextStart, mTextEnd, textRect);
-
-    return textRect;
+    return bounds;
   }
 }
