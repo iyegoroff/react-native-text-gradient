@@ -9,7 +9,7 @@ React-Native text gradient component for iOS & Android.
 
 ## Getting started
 
-`$ npm install react-native-text-gradient --save`
+`$ npm install iyegoroff/react-native-text-gradient#android-nested-gradient --save`
 
 ### Mostly automatic installation
 
