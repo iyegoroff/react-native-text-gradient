@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "reset:local-modules": "shx rm -rf local_modules && shx mkdir -p 'local_modules/react-native-text-gradient'",
+    "install:react-native-text-gradient": "shx cp -R '../!(example)' 'local_modules/react-native-text-gradient'",
+    "preinstall": "npm run reset:local-modules && npm run install:react-native-text-gradient"
+  },
+  "dependencies": {
+    "react": "16.3.1",
+    "react-native": "0.55.3",
+    "react-native-text-gradient": "file:local_modules/react-native-text-gradient"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "4.0.0",
+    "glob": "^7.1.2",
+    "shx": "^0.2.2"
+  }
+}
