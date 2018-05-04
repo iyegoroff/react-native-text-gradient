@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "dot-json example/package.json dependencies.react-native-text-gradient -d"
+    "postcommit": "dot-json example/package.json dependencies.react-native-text-gradient -d"
   },
   "repository": {
     "type": "git",
