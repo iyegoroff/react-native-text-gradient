@@ -37,6 +37,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
   private int mTextEnd;
   private String mText;
   private float mLineHeight;
+  private boolean mUseAbsoluteSizes;
 
   public RNLinearTextGradientSpan(
     float[] locations,
@@ -49,7 +50,8 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     int textStart,
     int textEnd,
     String text,
-    float lineHeight
+    float lineHeight,
+    boolean useAbsoluteSizes
   ) {
     mLocations = locations;
     mColors = colors;
@@ -62,6 +64,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     mTextEnd = textEnd;
     mText = text;
     mLineHeight = lineHeight;
+    mUseAbsoluteSizes = useAbsoluteSizes;
   }
 
   @Override
@@ -73,7 +76,12 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
       mText != null &&
       !YogaConstants.isUndefined(mMaxWidth)
     ) {
-      float lineHeight = (int) Math.ceil(Float.isNaN(mLineHeight) ? paint.getFontSpacing() : mLineHeight);
+    
+      FontMetrics metrics = paint.getFontMetrics();
+
+      float lineHeight = (int) Math.ceil(
+        Float.isNaN(mLineHeight) ? (metrics.descent - metrics.ascent) : mLineHeight
+      );
 
       TextBounds rectBeforeGradient = textBounds(
         mText.substring(0, mTextStart),
@@ -93,18 +101,24 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
 
       float width = mUseViewFrame ? mMaxWidth : gradientRect.width;
       float height = mUseViewFrame ? mMaxHeight : gradientRect.height;
+      float x0 = mUseAbsoluteSizes ? mStart[0] : (gradientRect.left + mStart[0] * width);
+      float y0 = mUseAbsoluteSizes ? mStart[1] : (gradientRect.top + mStart[1] * height);
+      float x1 = mUseAbsoluteSizes ? mEnd[0] : (gradientRect.left + mEnd[0] * width);
+      float y1 = mUseAbsoluteSizes ? mEnd[1] : (gradientRect.top + mEnd[1] * height);
 
       // Log.d(ReactConstants.TAG, "before: 0 - " + String.valueOf(mTextStart) + " " + textBoundsAsString(rectBeforeGradient));
       // Log.d(ReactConstants.TAG, "gradient: " + String.valueOf(mTextStart) + " - " + String.valueOf(mTextEnd) + " " + textBoundsAsString(gradientRect));
-      // Log.d(ReactConstants.TAG, "width " + String.valueOf(width) + " height " + String.valueOf(height));
-      // Log.d(ReactConstants.TAG, "lineHeight " + String.valueOf(lineHeight) + " spacing " + String.valueOf(paint.getFontSpacing()));
-      // Log.d(ReactConstants.TAG, "text " + mText);
+      // Log.d(ReactConstants.TAG, "width " + String.valueOf(width) + " height " + String.valueOf(height) + " maxWidth " + String.valueOf(mMaxWidth));
+      // Log.d(ReactConstants.TAG, "lineHeight " + String.valueOf(lineHeight) +  " metrics " + String.valueOf(metrics.bottom - metrics.top));
+      // Log.d(ReactConstants.TAG, "text " + mText.substring(mTextStart, mTextEnd));
+      // Log.d(ReactConstants.TAG, "metrics " + "top: " + String.valueOf(metrics.top) + " ascent: " + String.valueOf(metrics.ascent) + " descent: " + String.valueOf(metrics.descent) + " bottom: " + String.valueOf(metrics.bottom) + " leading: " + String.valueOf(metrics.leading));
+      // Log.d(ReactConstants.TAG, "coord " + String.valueOf(mUseAbsoluteSizes) + " x0: " + String.valueOf(x0) + " y0: " + String.valueOf(y0)+ " x1: " + String.valueOf(x1)+ " y1: " + String.valueOf(y1));
 
       LinearGradient gradient = new LinearGradient(
-        gradientRect.left + mStart[0] * width,
-        gradientRect.top + mStart[1] * height,
-        gradientRect.left + mEnd[0] * width,
-        gradientRect.top + mEnd[1] * height,
+        x0,
+        y0,
+        x1,
+        y1,
         mColors,
         mLocations,
         Shader.TileMode.CLAMP
@@ -115,9 +129,9 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     }
   }
 
-  // private String textBoundsAsString(TextBounds bounds) {
-  //   return "TextBounds(t: " + bounds.top + " l: " + bounds.left + " b: " + bounds.bottom + " r: " + bounds.right + " h: " + bounds.height + " w: " + bounds.width + " )";
-  // }
+  private String textBoundsAsString(TextBounds bounds) {
+    return "TextBounds(t: " + bounds.top + " l: " + bounds.left + " b: " + bounds.bottom + " r: " + bounds.right + " h: " + bounds.height + " w: " + bounds.width + " )";
+  }
 
   private TextBounds textBounds(String text, Paint paint, float startX, float startY, float lineHeight) {
     TextBounds bounds = new TextBounds();
@@ -133,7 +147,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     float lineOffset = startX;
 
     while (lineEnd <= text.length()) {
-      float lineWidth = paint.measureText(mText, lineStart, lineEnd) + lineOffset;
+      float lineWidth = paint.measureText(text, lineStart, lineEnd) + lineOffset;
   
       if (lineWidth > mMaxWidth) {  
         if (lineEnd == 1) {
@@ -141,13 +155,13 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
           bounds.left = 0;
         } else {
           bounds.width = Math.max(lineWidth, bounds.width);
+          bounds.height += lineHeight;
         }
 
         lineStart = lineEnd - 1;
         lineOffset = 0;
         bounds.bottom += lineHeight;
         bounds.right = 0;
-        bounds.height += lineHeight;
         bounds.left = 0;
       } else {
         lineEnd++;

@@ -6,12 +6,14 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "reset:local-modules": "shx rm -rf local_modules && shx mkdir -p 'local_modules/react-native-text-gradient'",
     "add-dependency:react-native-text-gradient": "npe dependencies.react-native-text-gradient 'file:local_modules/react-native-text-gradient'",
-    "install:react-native-text-gradient": "shx cp -R '../!(example)' 'local_modules/react-native-text-gradient' && npm i react-native-text-gradient",
-    "postinstall": "npm run reset:local-modules && npm run add-dependency:react-native-text-gradient && npm run install:react-native-text-gradient"
+    "install:react-native-text-gradient": "shx cp -R '../!(example|node_modules)' 'local_modules/react-native-text-gradient' && npm i react-native-text-gradient",
+    "reinstall:react-native-text-gradient": "npm run reset:local-modules && npm run add-dependency:react-native-text-gradient && npm run install:react-native-text-gradient",
+    "run:android": "npm run reinstall:react-native-text-gradient && react-native run-android",
+    "postinstall": "npm run reinstall:react-native-text-gradient"
   },
   "dependencies": {
     "react": "16.3.1",
-    "react-native": "0.55.3"
+    "react-native": "0.55.4"
   },
   "devDependencies": {
     "babel-preset-react-native": "4.0.0",

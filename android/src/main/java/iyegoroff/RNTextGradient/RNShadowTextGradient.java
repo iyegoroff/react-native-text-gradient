@@ -18,12 +18,15 @@ import android.text.SpannableStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import com.facebook.react.uimanager.UIViewOperationQueue;
+import android.util.Log;
+import com.facebook.react.common.ReactConstants;
 
 public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
   protected float[] mLocations;
   protected int[] mColors;
   protected boolean mUseViewFrame;
+  protected boolean mUseAbsoluteSizes;
 
   @ReactProp(name = "locations")
   public void setLocations(ReadableArray locations) {
@@ -64,6 +67,13 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
   @ReactProp(name = "useViewFrame")
   public void setUseViewFrame(boolean useViewFrame) {
     mUseViewFrame = useViewFrame;
+
+    markUpdated();
+  }
+
+  @ReactProp(name = "useAbsoluteSizes")
+  public void setUseAbsoluteSizes(boolean useAbsoluteSizes) {
+    mUseAbsoluteSizes = useAbsoluteSizes;
 
     markUpdated();
   }
@@ -179,8 +189,9 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       float lineHeight = textGradientShadowNode.getEffectiveLineHeight();
       RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
         .createSpan(builder, start, end, maxWidth, maxHeight, lineHeight);
+      // Log.d(ReactConstants.TAG, "ADD SPAN " + String.valueOf(start) + " - " + String.valueOf(end));
 
-     ops.add(spanOp);
+      ops.add(spanOp);
     }
   }
 

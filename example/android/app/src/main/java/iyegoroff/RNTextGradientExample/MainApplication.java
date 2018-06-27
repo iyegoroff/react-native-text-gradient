@@ -1,4 +1,4 @@
-package com.example;
+package iyegoroff.RNTextGradientExample;
 
 import android.app.Application;
 

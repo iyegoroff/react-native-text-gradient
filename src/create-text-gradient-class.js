@@ -49,6 +49,7 @@ const createTextGradientClass = (
       locations: true,
       useViewFrame: true,
       useGlobalCache: true,
+      useAbsoluteSizes: true,
       ...defaultPropAttributes
     }),
     uiViewClassName,
@@ -363,6 +364,7 @@ const createTextGradientClass = (
           colors: true,
           locations: true,
           useGlobalCache: true,
+          useAbsoluteSizes: true,
           ...defaultPropAttributes
         }),
         uiViewClassName: uiVirtualViewClassName
