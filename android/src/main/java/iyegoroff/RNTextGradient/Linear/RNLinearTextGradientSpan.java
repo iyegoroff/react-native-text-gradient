@@ -60,7 +60,9 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
       mColors != null &&
       mLocations != null &&
       mText != null &&
-      !YogaConstants.isUndefined(mMaxWidth)
+      !YogaConstants.isUndefined(mMaxWidth) &&
+      mMaxWidth != 0 &&
+      mMaxHeight != 0
     ) {
       // Rect textRect = new Rect();
       // paint.getTextBounds(mText, 0, mTextStart, textRect);

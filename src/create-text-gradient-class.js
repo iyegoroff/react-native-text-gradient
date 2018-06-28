@@ -19,8 +19,13 @@ import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
 import createReactNativeComponentClass from 'react-native/Libraries/Renderer/shims/createReactNativeComponentClass';
-import { ColorPropType, EdgeInsetsPropType, NativeMethodsMixin } from 'react-native';
-import { Touchable, processColor, Dimensions, UIManager } from 'react-native';
+import {
+  ColorPropType,
+  EdgeInsetsPropType,
+  Touchable,
+  processColor,
+  UIManager
+} from 'react-native';
 
 const stylePropType = StyleSheetPropType(TextStylePropTypes);
 
@@ -181,7 +186,7 @@ const createTextGradientClass = (
         isHighlighted: false,
       });
     },
-    mixins: [NativeMethodsMixin],
+    mixins: [],
     viewConfig: viewConfig,
     getChildContext() {
       return {
