@@ -14,7 +14,7 @@
 import * as React from 'react';
 import StyleSheetPropType from 'react-native/Libraries/StyleSheet/StyleSheetPropType';
 import ReactNativeViewAttributes from 'react-native/Libraries/Components/View/ReactNativeViewAttributes';
-import mergeFast from 'react-native/Libraries/Utilities/mergeFast';
+import mergeFast from './mergeFast';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
