@@ -13,8 +13,8 @@ const pattern = new RegExp(
 
 const patchFile = async (file) => {
   const content = (await promisify(fs.readFile)(file)).toString();
-  const patched = content.replace(patterns, '');
-  
+  const patched = content.replace(pattern, '');
+
   await promisify(fs.writeFile)(file, patched);
 };
 
