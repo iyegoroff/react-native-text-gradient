@@ -4,36 +4,17 @@ const fs = require('fs');
 const { promisify } = require('util');
 const glob = require('glob');
 
-const patterns = [
-  new RegExp(
-    'type === "AndroidTextInput" \\\|\\| // Android[\\s\\S]+' +
-    'type === "RCTMultilineTextInputView" \\|\\| // iOS[\\s\\S]+' +
-    'type === "RCTSinglelineTextInputView" \\|\\| // iOS[\\s\\S]+' +
-    'type === "RCTText" \\|\\|[\\s\\S]+' +
-    'type === "RCTVirtualText"'
-  ),
-
-  new RegExp(
-    '"AndroidTextInput" === props \\|\\|[\\s\\S]+' +
-    '"RCTMultilineTextInputView" === props \\|\\|[\\s\\S]+' +
-    '"RCTSinglelineTextInputView" === props \\|\\|[\\s\\S]+' +
-    '"RCTText" === props \\|\\|[\\s\\S]+' +
-    '"RCTVirtualText" === props'
-  )
-];
-
-const patches = [
-  'type.includes("Text")',
-
-  'props.includes("Text")'
-]
+const pattern = new RegExp(
+  'invariant\\([\\s\\S]' +
+  'hostContext\\.isInAParentText,[\\s\\S]' +
+  '"Text strings must be rendered within a <Text> component\\."[\\s\\S]' +
+  '\\);'
+);
 
 const patchFile = async (file) => {
   const content = (await promisify(fs.readFile)(file)).toString();
-  const patched = content
-    .replace(patterns[0], patches[0])
-    .replace(patterns[1], patches[1])
-
+  const patched = content.replace(patterns, '');
+  
   await promisify(fs.writeFile)(file, patched);
 };
 
