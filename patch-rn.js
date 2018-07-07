@@ -5,9 +5,9 @@ const { promisify } = require('util');
 const glob = require('glob');
 
 const pattern = new RegExp(
-  'invariant\\([\\s\\S]+?' +
-  '(hostContext|type)\\.isInAParentText,[\\s\\S]+?' +
-  '"Text strings must be rendered within a <Text> component\\."[\\s\\S]+?' +
+  'invariant\\([\\s\\S]{0,20}' +
+  '(hostContext|type)\\.isInAParentText,[\\s\\S]{0,20}' +
+  '"Text strings must be rendered within a <Text> component\\."[\\s\\S]{0,20}' +
   '\\);'
 );
 
