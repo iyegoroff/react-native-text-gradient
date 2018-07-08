@@ -66,6 +66,9 @@ const createTextGradientClass = (
  */
 
   const TextGradient = createReactClass({
+    statics: {
+      canRenderString: true
+    },
     displayName: uiViewClassName,
     propTypes: {
       /**
