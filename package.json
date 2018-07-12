@@ -1,6 +1,6 @@
 {
   "name": "react-native-text-gradient",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Text gradient for React-Native",
   "main": "index.js",
   "types": "index.d.ts",
