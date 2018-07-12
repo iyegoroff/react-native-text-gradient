@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
+const { writeFile, readFile, readdir } = require('fs');
 const { promisify } = require('util');
-const glob = require('glob');
+const path = require('path');
+
+const folder = 'node_modules/react-native/Libraries/Renderer/oss/';
 
 const pattern = new RegExp(
   'invariant\\([\\s\\S]{0,20}' +
@@ -12,16 +14,16 @@ const pattern = new RegExp(
 );
 
 const patchFile = async (file) => {
-  const content = (await promisify(fs.readFile)(file)).toString();
+  const content = (await promisify(readFile)(file)).toString();
   const patched = content.replace(pattern, '');
 
-  await promisify(fs.writeFile)(file, patched);
+  await promisify(writeFile)(file, patched);
 };
 
 const patchAll = async () => {
-  const files = await promisify(glob)('node_modules/react-native/Libraries/Renderer/oss/*');
+  const files = await promisify(readdir)(folder);
 
-  await Promise.all(files.map(patchFile));
+  await Promise.all(files.map(file => path.join(folder, file)).map(patchFile));
 };
 
 patchAll();
