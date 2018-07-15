@@ -92,7 +92,7 @@ Optional. If true gradient will be calculated for text view background frame rat
 
 ## Usage with rn >= 0.56.0
 
-Wait until https://github.com/facebook/react-native/pull/20097 will be merged or patch react-native to remove failing invariant checks
+Wait until https://github.com/facebook/react/pull/13211 will be merged or patch react-native to remove failing invariant checks
 
 `$ node node_modules/react-native-text-gradient/patch-rn.js`
 
