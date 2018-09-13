@@ -23,7 +23,7 @@
   "homepage": "https://github.com/iyegoroff/react-native-text-gradient#readme",
   "peerDependencies": {
     "react": "*",
-    "react-naive": "*",
+    "react-native": "*",
     "prop-types": "*",
     "create-react-class": "*"
   }
