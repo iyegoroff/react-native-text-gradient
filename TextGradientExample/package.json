@@ -5,20 +5,21 @@
   "scripts": {
     "postinstall": "metro-with-symlinks && npm run patch:rn",
     "patch:rn": "node node_modules/react-native-text-gradient/patch-rn.js",
+    "run:android": "cd android && ./gradlew clean && cd .. && react-native run-android",
     "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
-    "react": "^16.4.1",
-    "react-native": "0.56.0",
+    "react": "^16.5.1",
+    "react-native": "^0.57.0",
     "react-native-text-gradient": "file:../"
   },
   "devDependencies": {
     "babel-jest": "23.2.0",
-    "babel-preset-react-native": "^5",
     "jest": "23.3.0",
-    "metro-with-symlinks": "^1.1.1",
+    "metro-react-native-babel-preset": "^0.45.2",
+    "metro-with-symlinks": "github:treyp/metro-with-symlinks#rn-47",
     "react-test-renderer": "16.4.1"
   },
   "jest": {
