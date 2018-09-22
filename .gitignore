@@ -47,3 +47,5 @@ buck-out/
 .vscode/
 
 android/build/
+
+*.tgz
