@@ -10,7 +10,7 @@ const pattern = new RegExp(
   'invariant\\([\\s\\S]{0,20}' +
   '(hostContext|type)\\.isInAParentText,[\\s\\S]{0,20}' +
   '"Text strings must be rendered within a <Text> component\\."[\\s\\S]{0,20}' +
-  '\\);'
+  '\\)[;,]'
 );
 
 const patchFile = async (file) => {
