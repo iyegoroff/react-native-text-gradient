@@ -2,8 +2,8 @@
   "name": "react-native-text-gradient",
   "version": "0.0.15",
   "description": "Text gradient for React-Native",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,5 +26,15 @@
     "react-native": "*",
     "prop-types": "*",
     "fbjs": "*"
-  }
+  },
+  "files": [
+    "android",
+    "example",
+    "ios",
+    "src",
+    "img",
+    ".dockerignore",
+    "*.md",
+    "patch-rn.js"
+  ]
 }

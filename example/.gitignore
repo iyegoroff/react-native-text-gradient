@@ -1,0 +1,10 @@
+node_modules/
+infer-out/
+xcodebuild.log
+src/obj/
+src/bin/
+**/.DS_Store
+.gradle/
+compile_commands.json
+rn-cli.config.js
+*.apk

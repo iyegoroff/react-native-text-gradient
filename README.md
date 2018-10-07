@@ -1,4 +1,3 @@
-
 # react-native-text-gradient
 [![npm version](https://badge.fury.io/js/react-native-text-gradient.svg?t=1495378566925)](https://badge.fury.io/js/react-native-text-gradient)
 [![Dependency Status](https://david-dm.org/iyegoroff/react-native-text-gradient.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-text-gradient)
