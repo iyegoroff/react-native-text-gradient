@@ -25,7 +25,8 @@
     "react": "*",
     "react-native": "*",
     "prop-types": "*",
-    "fbjs": "*"
+    "fbjs": "*",
+    "@babel/runtime": "*"
   },
   "files": [
     "android",
