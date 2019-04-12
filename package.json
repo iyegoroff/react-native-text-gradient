@@ -1,12 +1,11 @@
 {
   "name": "react-native-text-gradient",
-  "version": "0.0.8",
+  "version": "0.0.16",
   "description": "Text gradient for React-Native",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "dot-json example/package.json dependencies.react-native-text-gradient -d && git add example/package.json"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,8 +21,21 @@
     "url": "https://github.com/iyegoroff/react-native-text-gradient/issues"
   },
   "homepage": "https://github.com/iyegoroff/react-native-text-gradient#readme",
-  "devDependencies": {
-    "dot-json": "^1.0.4",
-    "husky": "^0.14.3"
-  }
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "prop-types": "*",
+    "fbjs": "*",
+    "@babel/runtime": "*"
+  },
+  "files": [
+    "android",
+    "example",
+    "ios",
+    "src",
+    "img",
+    ".dockerignore",
+    "*.md",
+    "patch-rn.js"
+  ]
 }

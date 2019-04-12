@@ -1,4 +1,3 @@
-
 # react-native-text-gradient
 [![npm version](https://badge.fury.io/js/react-native-text-gradient.svg?t=1495378566925)](https://badge.fury.io/js/react-native-text-gradient)
 [![Dependency Status](https://david-dm.org/iyegoroff/react-native-text-gradient.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-text-gradient)
@@ -23,7 +22,8 @@ React-Native text gradient component for iOS & Android.
 
 - Component works as drop-in replacement for standard `Text` component and it is possible to have nested gradients.
 - React-Native:
-  - with rn >= 0.55.0 use latest version;
+  - with rn >= 0.56.0 use latest version and [patch](#usage-with-rn--0560);
+  - with rn >= 0.55.0 use 0.0.9;
   - with rn >= 0.54.0 use 0.0.7;
   - with rn >= 0.53.1 use 0.0.4;
   - rn 0.53.0 is not supported;
@@ -86,6 +86,13 @@ Optional. If true gradient will be calculated for text view background frame rat
 ```
 
 <img src="img/useViewFrame.png" width="300">
+
+
+## Usage with rn >= 0.56.0
+
+Wait until https://github.com/facebook/react/pull/13211 will be merged or patch react-native to remove failing invariant checks
+
+`$ node node_modules/react-native-text-gradient/patch-rn.js`
 
 
 ## Caveats
