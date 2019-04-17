@@ -1,5 +1,10 @@
 package iyegoroff.RNTextGradient;
 
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.UiThreadUtil;
+import com.facebook.react.uimanager.NativeViewHierarchyManager;
+import com.facebook.react.uimanager.UIImplementation;
+import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.views.text.ReactTextShadowNode;
 import com.facebook.react.views.text.ReactBaseTextShadowNode;
 import com.facebook.react.views.text.ReactRawTextShadowNode;
@@ -9,7 +14,10 @@ import com.facebook.react.uimanager.NativeViewHierarchyOptimizer;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import java.lang.Exception;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+
+import android.support.annotation.Nullable;
 import android.util.Log;
 import com.facebook.react.common.ReactConstants;
 import java.lang.String;
@@ -19,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.facebook.react.uimanager.UIViewOperationQueue;
 import android.util.Log;
+import android.view.View;
+
 import com.facebook.react.common.ReactConstants;
 
 public abstract class RNShadowTextGradient extends ReactTextShadowNode {
@@ -27,6 +37,38 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
   protected int[] mColors;
   protected boolean mUseViewFrame;
   protected boolean mUseAbsoluteSizes;
+  private WeakReference<ReactApplicationContext> mContext;
+
+  public RNShadowTextGradient(ReactApplicationContext context) {
+    super();
+
+    mContext = new WeakReference<>(context);
+  }
+
+  private @Nullable View resolveView(int tag) {
+    UiThreadUtil.assertOnUiThread();
+    ReactApplicationContext context = mContext.get();
+
+    if (context != null) {
+      UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
+
+      NativeViewHierarchyManager manager = ReflectUtils.getFieldValue(
+        ReflectUtils.getFieldValue(
+          uiManager.getUIImplementation(),
+          "mOperationsQueue",
+          null
+        ),
+        "mNativeViewHierarchyManager",
+        null
+      );
+
+      if (manager != null) {
+        return manager.resolveView(tag);
+      }
+    }
+
+    return null;
+  }
 
   @ReactProp(name = "locations")
   public void setLocations(ReadableArray locations) {
@@ -108,18 +150,30 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
   private void updateGradient() {
     if (!isVirtual()) {
-      String fieldName = "mPreparedSpannableText";
-        
-      setParentFieldValue(
-        this,
-        fieldName,
-        spannableWithGradient(
-          (Spannable) getParentFieldValue(this, fieldName),
-          this,
-          getLayoutWidth(),
-          getLayoutHeight()
-        )
-      );  
+      final RNShadowTextGradient that = this;
+      UiThreadUtil.runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+          String fieldName = "mPreparedSpannableText";
+
+          Log.d(ReactConstants.TAG, "GRD view " + String.valueOf(that.resolveView(getReactTag())));
+
+          ReflectUtils.setFieldValue(
+                  this,
+                  fieldName,
+                  spannableWithGradient(
+                          (Spannable) ReflectUtils.getFieldValue(this, fieldName, ReactTextShadowNode.class),
+                          that,
+                          getLayoutWidth(),
+                          getLayoutHeight(),
+                          (int) ReflectUtils.invokeMethod(this, "getTextAlign", ReactTextShadowNode.class),
+                          mTextBreakStrategy,
+                          mIncludeFontPadding
+                  ),
+                  ReactTextShadowNode.class
+          );
+        }
+      });
     }
   }
 
@@ -129,18 +183,32 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end,
     float maxWidth,
     float maxHeight,
-    float lineHeight
+    int alignment,
+    int textBreakStrategy,
+    boolean includeFontPadding
   );
 
   protected static Spannable spannableWithGradient(
     Spannable spannable,
     RNShadowTextGradient textCSSNode,
     float maxWidth,
-    float maxHeight
+    float maxHeight,
+    int alignment,
+    int textBreakStrategy,
+    boolean includeFontPadding
   ) {
     List<RNSetGradientSpanOperation> ops = new ArrayList<>();
     SpannableStringBuilder gradientBuilder = new SpannableStringBuilder();
-    buildSpannedGradientFromTextCSSNode(textCSSNode, gradientBuilder, ops, maxWidth, maxHeight);
+    buildSpannedGradientFromTextCSSNode(
+      textCSSNode,
+      gradientBuilder,
+      ops,
+      maxWidth,
+      maxHeight,
+      alignment,
+      textBreakStrategy,
+      includeFontPadding
+    );
 
     for (int i = ops.size() - 1; i >= 0; i--) {
     //for (int i = 0; i < ops.size(); i++) {
@@ -155,7 +223,10 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     SpannableStringBuilder builder,
     List<RNSetGradientSpanOperation> ops,
     float maxWidth,
-    float maxHeight
+    float maxHeight,
+    int alignment,
+    int textBreakStrategy,
+    boolean includeFontPadding
   ) {
     int start = builder.length();
 
@@ -171,12 +242,15 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
           builder,
           ops,
           maxWidth,
-          maxHeight
+          maxHeight,
+          alignment,
+          textBreakStrategy,
+          includeFontPadding
         );
 
       } else if (child instanceof ReactTextInlineImageShadowNode) {
         builder.append(
-          (String) getParentFieldValue(textGradientShadowNode, "INLINE_IMAGE_PLACEHOLDER")
+          (String) ReflectUtils.getFieldValue(textGradientShadowNode, "INLINE_IMAGE_PLACEHOLDER", ReactTextShadowNode.class)
         );
       }
 
@@ -186,40 +260,20 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end = builder.length();
 
     if (end >= start && textGradientShadowNode instanceof RNShadowTextGradient) {
-      float lineHeight = textGradientShadowNode.getEffectiveLineHeight();
       RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
-        .createSpan(builder, start, end, maxWidth, maxHeight, lineHeight);
+        .createSpan(
+          builder,
+          start,
+          end,
+          maxWidth,
+          maxHeight,
+          alignment,
+          textBreakStrategy,
+          includeFontPadding
+        );
       // Log.d(ReactConstants.TAG, "ADD SPAN " + String.valueOf(start) + " - " + String.valueOf(end));
 
       ops.add(spanOp);
-    }
-  }
-
-  private static <T> T getParentFieldValue(Object target, String name) {
-    try {
-      Field field = ReactTextShadowNode.class.getDeclaredField(name);
-      field.setAccessible(true);
-
-      return (T) field.get(target);
-
-    } catch (Exception e) {
-      Log.d(ReactConstants.TAG, "Can't get ReactTextShadowNode field " + name);
-      Log.d(ReactConstants.TAG, e.getMessage());
-    }
-
-    return null;
-  }
-
-
-  private static <T> void setParentFieldValue(Object target, String name, T value) {
-    try {
-      Field field = ReactTextShadowNode.class.getDeclaredField(name);
-      field.setAccessible(true);
-      field.set(target, value);
-
-    } catch (Exception e) {
-      Log.d(ReactConstants.TAG, "Can't set ReactTextShadowNode field " + name);
-      Log.d(ReactConstants.TAG, e.getMessage());
     }
   }
 }

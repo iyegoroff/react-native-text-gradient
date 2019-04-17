@@ -1,7 +1,6 @@
-
 package iyegoroff.RNTextGradient;
+
 import com.facebook.react.views.text.ReactTextViewManager;
-import com.facebook.react.views.text.ReactTextView;
 import com.facebook.react.views.text.ReactTextAnchorViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 

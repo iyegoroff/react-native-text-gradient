@@ -1,7 +1,5 @@
 package iyegoroff.RNTextGradient;
 
-import com.facebook.react.common.annotations.VisibleForTesting;
-import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.BaseViewManager;
 import android.view.View;

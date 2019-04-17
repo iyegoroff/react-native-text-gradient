@@ -1,23 +1,21 @@
 package iyegoroff.RNTextGradient.Linear;
 
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import iyegoroff.RNTextGradient.RNShadowTextGradient;
+
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.views.text.ReactTextShadowNode;
-import android.util.Log;
-import com.facebook.react.common.ReactConstants;
-import java.lang.Exception;
-import java.lang.reflect.Field;
-import java.lang.String;
 import iyegoroff.RNTextGradient.RNSetGradientSpanOperation;
-import android.text.style.ForegroundColorSpan;
 
 public class RNShadowLinearTextGradient extends RNShadowTextGradient {
 
   private float[] mStart;
   private float[] mEnd;
+
+  RNShadowLinearTextGradient(ReactApplicationContext context) {
+    super(context);
+  }
 
   @ReactProp(name = "gradientStart")
   public void setStart(ReadableArray start) {
@@ -50,7 +48,9 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     int end,
     float maxWidth,
     float maxHeight,
-    float lineHeight
+    int alignment,
+    int textBreakStrategy,
+    boolean includeFontPadding
   ) {
     RNLinearTextGradientSpan span = new RNLinearTextGradientSpan(
       mLocations,
@@ -60,10 +60,12 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
       mUseViewFrame,
       maxWidth,
       maxHeight,
+      alignment,
+      textBreakStrategy,
+      includeFontPadding,
       start,
       end,
       builder.toString(),
-      lineHeight,
       mUseAbsoluteSizes
     );
 
