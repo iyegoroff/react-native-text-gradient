@@ -113,9 +113,3 @@ When mixing several text gradients and `Text`s top component always should be te
 ```
 
 This is necessary because only top text component is 'mapped' to actual native node and its children are 'virtual' from the native perspective.
-
-## FAQ
-
-#### Is it ready for production?
-
-- Yes, I use it in production
