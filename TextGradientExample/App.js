@@ -30,7 +30,7 @@ export default class App extends Component<Props> {
           end={{ x: 1, y: 0 }}
           // useViewFrame={true}
         >
-          Welcome to React Native!Welcome to React Native
+          Welcome to React Native!
         </LinearTextGradient>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
