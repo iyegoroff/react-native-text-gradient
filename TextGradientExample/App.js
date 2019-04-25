@@ -28,8 +28,9 @@ export default class App extends Component<Props> {
           colors={['blue', 'red']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
+          // useViewFrame={true}
         >
-          Welcome to React Native!
+          Welcome to React Native!Welcome to React Native
         </LinearTextGradient>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
@@ -47,7 +48,9 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
+    // width: '100%',
+    // textAlign: 'right',
+    // backgroundColor: 'lightgray',
     margin: 10,
   },
   instructions: {

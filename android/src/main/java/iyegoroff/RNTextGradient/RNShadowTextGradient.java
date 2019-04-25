@@ -69,7 +69,6 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
   protected float[] mLocations;
   protected int[] mColors;
   protected boolean mUseViewFrame;
-  protected boolean mUseAbsoluteSizes;
   private WeakReference<ReactApplicationContext> mContext;
 
   public RNShadowTextGradient(ReactApplicationContext context) {
@@ -145,14 +144,6 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
   @ReactProp(name = "useViewFrame")
   public void setUseViewFrame(boolean useViewFrame) {
     mUseViewFrame = useViewFrame;
-
-    markUpdated();
-  }
-
-  @SuppressWarnings("unused")
-  @ReactProp(name = "useAbsoluteSizes")
-  public void setUseAbsoluteSizes(boolean useAbsoluteSizes) {
-    mUseAbsoluteSizes = useAbsoluteSizes;
 
     markUpdated();
   }

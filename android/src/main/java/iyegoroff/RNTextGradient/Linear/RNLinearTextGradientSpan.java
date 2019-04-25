@@ -29,8 +29,7 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
     int textEnd,
     float maxWidth,
     float maxHeight,
-    String text,
-    boolean useAbsoluteSizes
+    String text
   ) {
     if (
       start != null &&
@@ -48,12 +47,23 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
       layout.getSelectionPath(textStart, textEnd, path);
       path.computeBounds(bounds, true);
 
+      if (layout.getLineForOffset(textEnd - 1) != layout.getLineForOffset(textEnd)) {
+        RectF lastSymbolBounds = new RectF();
+        layout.getSelectionPath(textEnd - 1, textEnd, path);
+        path.computeBounds(lastSymbolBounds, true);
+
+        if (lastSymbolBounds.contains(bounds) && bounds.contains(lastSymbolBounds)) {
+          layout.getSelectionPath(textStart, textEnd - 1, path);
+          path.computeBounds(bounds, true);
+        }
+      }
+
       float width = useViewFrame ? maxWidth : bounds.width();
       float height = useViewFrame ? maxHeight : bounds.height();
-      float x0 = useAbsoluteSizes ? start[0] : (bounds.left + start[0] * width);
-      float y0 = useAbsoluteSizes ? start[1] : (bounds.top + start[1] * height);
-      float x1 = useAbsoluteSizes ? end[0] : (bounds.left + end[0] * width);
-      float y1 = useAbsoluteSizes ? end[1] : (bounds.top + end[1] * height);
+      float x0 = (useViewFrame ? 0 : bounds.left) + start[0] * width;
+      float y0 = (useViewFrame ? 0 : bounds.top) + start[1] * height;
+      float x1 = (useViewFrame ? 0 : bounds.left) + end[0] * width;
+      float y1 = (useViewFrame ? 0 : bounds.top) + end[1] * height;
 
       mGradient = new LinearGradient(x0, y0, x1, y1, colors, locations, Shader.TileMode.CLAMP);
     }

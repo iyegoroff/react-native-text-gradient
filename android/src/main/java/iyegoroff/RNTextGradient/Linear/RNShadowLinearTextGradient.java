@@ -65,8 +65,7 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
       end,
       maxWidth,
       maxHeight,
-      builder.toString(),
-      mUseAbsoluteSizes
+      builder.toString()
     );
 
     return new RNSetGradientSpanOperation(start, end, span);
