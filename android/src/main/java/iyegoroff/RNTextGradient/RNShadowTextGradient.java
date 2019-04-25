@@ -237,7 +237,11 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
                     that.getPadding(Spacing.TOP),
                     that.getPadding(Spacing.END),
                     that.getPadding(Spacing.BOTTOM),
-                    (int) ReflectUtils.invokeMethod(that, "getTextAlign", ReactTextShadowNode.class),
+                    (int) ReflectUtils.invokeMethod(
+                      that,
+                      "getTextAlign",
+                      ReactTextShadowNode.class
+                    ),
                     that.mTextBreakStrategy,
                     that.mJustificationMode
                   );
@@ -344,7 +348,11 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
       } else if (child instanceof ReactTextInlineImageShadowNode) {
         builder.append(
-          (String) ReflectUtils.getFieldValue(textGradientShadowNode, "INLINE_IMAGE_PLACEHOLDER", ReactTextShadowNode.class)
+          (String) ReflectUtils.getFieldValue(
+            textGradientShadowNode,
+            "INLINE_IMAGE_PLACEHOLDER",
+            ReactTextShadowNode.class
+          )
         );
       }
 

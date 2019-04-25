@@ -19,75 +19,20 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-
-  grad(text, key) {
-    return (
-      <LinearTextGradient
-        style = {
-          [styles.welcome, {
-            backgroundColor: 'red',
-            textDecorationLine: 'underline',
-          }]
-        }
-        key={key}
-        locations={[0, 1]}
-        colors={['green', 'red']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      >
-        {text}
-      </LinearTextGradient>
-    )
-  }
   render() {
     return (
       <View style={styles.container}>
         <LinearTextGradient
-          style = {
-            [styles.welcome, {
-              backgroundColor: 'lightgray'
-            }]
-          }
+          style={styles.welcome}
           locations={[0, 1]}
-          colors={['lime', 'purple']}
-          start={{ x: 1, y: 0 }}
-          end={{ x: 0, y: 0 }}
+          colors={['blue', 'red']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
         >
-        {/* _████████████_ */}
-          {this.grad('.█ ██ ███ █ ███ ',1)}
-          {this.grad('.█ ',2)}
-          {this.grad('2█ ')}
-          {this.grad('3█ ')}
-          {this.grad('.██ ')}
-          {this.grad('.███ ')}
-          {this.grad('.█ █ ')}
-          {this.grad('.█ █ █ ')}
-          {this.grad('.█ ██ ██ ', 'yellow')}
-          {this.grad('.█ ')}
-          {this.grad('?██ ')}
-          {this.grad('.███ ')}
-          {this.grad('.█ █ ')}
-          {this.grad('.█ █ █ ')}
-          {this.grad('.█ ██ ██ ')}
-          {this.grad('.█')}
-          {this.grad('.██ ')}
-          {this.grad('.█████████ ')}
-          {this.grad('.█ █ ')}
-          {this.grad('.█ █ █ ')}
-          {this.grad('.█ ██ █ ')}
-          {this.grad('.█ ')}
-          {this.grad('.██ ')}
-          {this.grad('.███ ')}
-          {this.grad('.█ █ ')}
-          {this.grad('.█ █ █ ')}
+          Welcome to React Native!
         </LinearTextGradient>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-          <Text style={[styles.instructions, {
-            textDecorationLine: 'underline',
-            fontWeight: 'bold'
-          }]}>{instructions}</Text>
-        </Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
   }
@@ -101,14 +46,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    color: 'white'
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5
+    marginBottom: 5,
   },
 });

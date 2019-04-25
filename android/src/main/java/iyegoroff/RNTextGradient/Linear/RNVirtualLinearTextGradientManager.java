@@ -9,7 +9,9 @@ import java.lang.String;
 import javax.annotation.Nonnull;
 
 @ReactModule(name = RNVirtualLinearTextGradientManager.REACT_CLASS)
-public class RNVirtualLinearTextGradientManager extends RNVirtualTextGradientManager<RNVirtualShadowLinearTextGradient> {
+public class RNVirtualLinearTextGradientManager extends RNVirtualTextGradientManager<
+  RNVirtualShadowLinearTextGradient
+> {
 
   @VisibleForTesting
   static final String REACT_CLASS = "RNVirtualLinearTextGradient";

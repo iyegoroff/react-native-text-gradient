@@ -28,21 +28,6 @@ class ReflectUtils {
         return null;
     }
 
-    @SuppressWarnings("unused")
-    static <T> void setFieldValue(Object target, String name, T value, @Nullable Class type) {
-        type = type == null ? target.getClass() : type;
-
-        try {
-            Field field = type.getDeclaredField(name);
-            field.setAccessible(true);
-            field.set(target, value);
-
-        } catch (Exception e) {
-            FLog.w(ReactConstants.TAG, "Can't set " + type.getName() + " field " + name);
-            FLog.w(ReactConstants.TAG, e.getMessage());
-        }
-    }
-
     @SuppressWarnings({"unchecked", "SameParameterValue"})
     static <T> T invokeMethod(Object target, String name, @Nullable Class type) {
         type = type == null ? target.getClass() : type;
