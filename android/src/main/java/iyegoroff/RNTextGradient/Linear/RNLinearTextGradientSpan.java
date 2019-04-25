@@ -55,8 +55,6 @@ public class RNLinearTextGradientSpan extends CharacterStyle implements UpdateAp
       float x1 = useAbsoluteSizes ? end[0] : (bounds.left + end[0] * width);
       float y1 = useAbsoluteSizes ? end[1] : (bounds.top + end[1] * height);
 
-//      LogLayout.log(layout, textStart, textEnd, "'" + text.substring(textStart, textEnd) + "' " + textStart + " " + textEnd);
-
       mGradient = new LinearGradient(x0, y0, x1, y1, colors, locations, Shader.TileMode.CLAMP);
     }
   }

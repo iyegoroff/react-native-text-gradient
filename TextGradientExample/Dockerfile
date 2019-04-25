@@ -2,7 +2,7 @@ FROM iyegoroff/fable-android:1
 
 RUN mkdir /package
 COPY . /package
-WORKDIR /package/example
+WORKDIR /package/TextGradientExample
 
 RUN npm i --unsafe-perm
 RUN npm run generate:android:bundle
