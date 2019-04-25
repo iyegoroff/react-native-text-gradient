@@ -30,7 +30,7 @@
   },
   "files": [
     "android",
-    "example",
+    "TextGradientExample",
     "ios",
     "src",
     "img",
