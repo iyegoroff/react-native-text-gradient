@@ -3,7 +3,8 @@ package iyegoroff.RNTextGradient;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.uimanager.NativeViewHierarchyManager;
-import com.facebook.react.uimanager.UIImplementation;
+import com.facebook.react.uimanager.Spacing;
+import com.facebook.react.uimanager.UIBlock;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.views.text.ReactTextShadowNode;
 import com.facebook.react.views.text.ReactBaseTextShadowNode;
@@ -13,25 +14,57 @@ import com.facebook.react.uimanager.ReactShadowNode;
 import com.facebook.react.uimanager.NativeViewHierarchyOptimizer;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import java.lang.Exception;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
-import com.facebook.react.common.ReactConstants;
+import android.text.Editable;
+import android.text.Layout;
 import java.lang.String;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.facebook.react.uimanager.UIViewOperationQueue;
-import android.util.Log;
+
+import android.text.TextWatcher;
 import android.view.View;
 
-import com.facebook.react.common.ReactConstants;
+import com.facebook.react.views.text.ReactTextUpdate;
 
 public abstract class RNShadowTextGradient extends ReactTextShadowNode {
+
+  private static class TextChangeListener extends OneOffListener implements TextWatcher {
+
+    TextChangeListener(Runnable update) {
+      super(update);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+      trigger();
+    }
+  }
+
+  private static class LayoutChangeListener extends OneOffListener implements View.OnLayoutChangeListener {
+
+    LayoutChangeListener(Runnable update) {
+      super(update);
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+      trigger();
+    }
+  }
+
+  private final static String sSpannableField = "mPreparedSpannableText";
 
   protected float[] mLocations;
   protected int[] mColors;
@@ -70,6 +103,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     return null;
   }
 
+  @SuppressWarnings("unused")
   @ReactProp(name = "locations")
   public void setLocations(ReadableArray locations) {
     if (locations != null) {
@@ -88,6 +122,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     markUpdated();
   }
 
+  @SuppressWarnings("unused")
   @ReactProp(name = "colors")
   public void setColors(ReadableArray colors) {
     if (colors != null) {
@@ -103,9 +138,10 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       mColors = null;
     }
 
-    markUpdated();    
+    markUpdated();
   }
 
+  @SuppressWarnings("unused")
   @ReactProp(name = "useViewFrame")
   public void setUseViewFrame(boolean useViewFrame) {
     mUseViewFrame = useViewFrame;
@@ -113,6 +149,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     markUpdated();
   }
 
+  @SuppressWarnings("unused")
   @ReactProp(name = "useAbsoluteSizes")
   public void setUseAbsoluteSizes(boolean useAbsoluteSizes) {
     mUseAbsoluteSizes = useAbsoluteSizes;
@@ -141,40 +178,108 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     return layoutHasChanged;
   }
 
-  @Override
-  public void onCollectExtraUpdates(UIViewOperationQueue uiViewOperationQueue) {
-    updateGradient();
-
-    super.onCollectExtraUpdates(uiViewOperationQueue);
+  private Spannable updatedSpannable(Layout layout) {
+    return spannableWithGradient(
+      getSpannable(),
+      this,
+      getLayoutWidth(),
+      getLayoutHeight(),
+      layout
+    );
   }
 
-  private void updateGradient() {
-    if (!isVirtual()) {
-      final RNShadowTextGradient that = this;
-      UiThreadUtil.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-          String fieldName = "mPreparedSpannableText";
+  private Spannable getSpannable() {
+    return ReflectUtils.getFieldValue(this, sSpannableField, ReactTextShadowNode.class);
+  }
 
-          Log.d(ReactConstants.TAG, "GRD view " + String.valueOf(that.resolveView(getReactTag())));
+  @Override
+  public void onCollectExtraUpdates(final UIViewOperationQueue uiViewOperationQueue) {
+    final RNShadowTextGradient that = this;
 
-          ReflectUtils.setFieldValue(
-                  this,
-                  fieldName,
-                  spannableWithGradient(
-                          (Spannable) ReflectUtils.getFieldValue(this, fieldName, ReactTextShadowNode.class),
-                          that,
-                          getLayoutWidth(),
-                          getLayoutHeight(),
-                          (int) ReflectUtils.invokeMethod(this, "getTextAlign", ReactTextShadowNode.class),
-                          mTextBreakStrategy,
-                          mIncludeFontPadding
-                  ),
-                  ReactTextShadowNode.class
-          );
+    uiViewOperationQueue.enqueueUIBlock(new UIBlock() {
+      @Override
+      public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
+        final RNTextGradient view = (RNTextGradient) that.resolveView(getReactTag());
+
+        if (view != null) {
+          Layout layout = view.getLayout();
+
+          if (layout != null) {
+            ReactTextUpdate textUpdate = new ReactTextUpdate(
+              that.updatedSpannable(layout),
+              UNSET,
+              that.mContainsImages,
+              that.getPadding(Spacing.START),
+              that.getPadding(Spacing.TOP),
+              that.getPadding(Spacing.END),
+              that.getPadding(Spacing.BOTTOM),
+              (int) ReflectUtils.invokeMethod(that, "getTextAlign", ReactTextShadowNode.class),
+              that.mTextBreakStrategy,
+              that.mJustificationMode
+            );
+
+            view.setText(textUpdate);
+          }
+
+          Runnable update = new Runnable() {
+            @Override
+            public void run() {
+              Runnable exec = new Runnable() {
+                @Override
+                public void run() {
+                  Layout layout = view.getLayout();
+
+                  ReactTextUpdate textUpdate = new ReactTextUpdate(
+                    that.updatedSpannable(layout),
+                    UNSET,
+                    that.mContainsImages,
+                    that.getPadding(Spacing.START),
+                    that.getPadding(Spacing.TOP),
+                    that.getPadding(Spacing.END),
+                    that.getPadding(Spacing.BOTTOM),
+                    (int) ReflectUtils.invokeMethod(that, "getTextAlign", ReactTextShadowNode.class),
+                    that.mTextBreakStrategy,
+                    that.mJustificationMode
+                  );
+
+                  view.setText(textUpdate);
+                }
+              };
+
+              if (view.getLayout() != null) {
+                exec.run();
+              } else {
+                UiThreadUtil.runOnUiThread(exec);
+              }
+            }
+          };
+
+          final LayoutChangeListener layoutListener = new LayoutChangeListener(update);
+
+          view.addOnLayoutChangeListener(layoutListener);
+
+          layoutListener.addRemoval(new Runnable() {
+            @Override
+            public void run() {
+              view.removeOnLayoutChangeListener(layoutListener);
+            }
+          });
+
+          final TextChangeListener textListener = new TextChangeListener(update);
+
+          view.addTextChangedListener(textListener);
+
+          textListener.addRemoval(new Runnable() {
+            @Override
+            public void run() {
+              view.removeTextChangedListener(textListener);
+            }
+          });
         }
-      });
-    }
+      }
+    });
+
+    super.onCollectExtraUpdates(uiViewOperationQueue);
   }
 
   protected abstract RNSetGradientSpanOperation createSpan(
@@ -183,19 +288,15 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
     int end,
     float maxWidth,
     float maxHeight,
-    int alignment,
-    int textBreakStrategy,
-    boolean includeFontPadding
+    Layout layout
   );
 
-  protected static Spannable spannableWithGradient(
+  private static Spannable spannableWithGradient(
     Spannable spannable,
     RNShadowTextGradient textCSSNode,
     float maxWidth,
     float maxHeight,
-    int alignment,
-    int textBreakStrategy,
-    boolean includeFontPadding
+    Layout layout
   ) {
     List<RNSetGradientSpanOperation> ops = new ArrayList<>();
     SpannableStringBuilder gradientBuilder = new SpannableStringBuilder();
@@ -205,32 +306,27 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
       ops,
       maxWidth,
       maxHeight,
-      alignment,
-      textBreakStrategy,
-      includeFontPadding
+      layout
     );
 
     for (int i = ops.size() - 1; i >= 0; i--) {
-    //for (int i = 0; i < ops.size(); i++) {
       ops.get(i).execute((SpannableStringBuilder) spannable);
     }
 
     return spannable;
   }
 
-  protected static void buildSpannedGradientFromTextCSSNode(
+  private static void buildSpannedGradientFromTextCSSNode(
     ReactBaseTextShadowNode textGradientShadowNode,
     SpannableStringBuilder builder,
     List<RNSetGradientSpanOperation> ops,
     float maxWidth,
     float maxHeight,
-    int alignment,
-    int textBreakStrategy,
-    boolean includeFontPadding
+    Layout layout
   ) {
     int start = builder.length();
 
-    for (int i = 0, length = textGradientShadowNode.getChildCount(); i < length; i++) {
+    for (int i = 0; i < textGradientShadowNode.getChildCount(); i++) {
       ReactShadowNode child = textGradientShadowNode.getChildAt(i);
 
       if (child instanceof ReactRawTextShadowNode) {
@@ -243,9 +339,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
           ops,
           maxWidth,
           maxHeight,
-          alignment,
-          textBreakStrategy,
-          includeFontPadding
+          layout
         );
 
       } else if (child instanceof ReactTextInlineImageShadowNode) {
@@ -261,17 +355,7 @@ public abstract class RNShadowTextGradient extends ReactTextShadowNode {
 
     if (end >= start && textGradientShadowNode instanceof RNShadowTextGradient) {
       RNSetGradientSpanOperation spanOp = ((RNShadowTextGradient) textGradientShadowNode)
-        .createSpan(
-          builder,
-          start,
-          end,
-          maxWidth,
-          maxHeight,
-          alignment,
-          textBreakStrategy,
-          includeFontPadding
-        );
-      // Log.d(ReactConstants.TAG, "ADD SPAN " + String.valueOf(start) + " - " + String.valueOf(end));
+        .createSpan(builder, start, end, maxWidth, maxHeight, layout);
 
       ops.add(spanOp);
     }

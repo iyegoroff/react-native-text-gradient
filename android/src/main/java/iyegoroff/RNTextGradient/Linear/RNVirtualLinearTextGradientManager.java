@@ -6,6 +6,8 @@ import com.facebook.react.module.annotations.ReactModule;
 import iyegoroff.RNTextGradient.RNVirtualTextGradientManager;
 import java.lang.String;
 
+import javax.annotation.Nonnull;
+
 @ReactModule(name = RNVirtualLinearTextGradientManager.REACT_CLASS)
 public class RNVirtualLinearTextGradientManager extends RNVirtualTextGradientManager<RNVirtualShadowLinearTextGradient> {
 
@@ -13,12 +15,14 @@ public class RNVirtualLinearTextGradientManager extends RNVirtualTextGradientMan
   static final String REACT_CLASS = "RNVirtualLinearTextGradient";
 
   @Override
-  public String getName() {
+  public @Nonnull String getName() {
     return REACT_CLASS;
   }
 
   @Override
-  public RNVirtualShadowLinearTextGradient createShadowNodeInstance(ReactApplicationContext context) {
+  public @Nonnull RNVirtualShadowLinearTextGradient createShadowNodeInstance(
+    @Nonnull ReactApplicationContext context
+  ) {
     return new RNVirtualShadowLinearTextGradient(context);
   }
 

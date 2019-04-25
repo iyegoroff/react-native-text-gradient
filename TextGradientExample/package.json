@@ -13,7 +13,8 @@
     "generate:android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/",
     "build:docker:image": "docker build -t text-gradient-android.image -f ./Dockerfile ../",
     "extract:docker:apk": "docker create -ti --name text-gradient-android-container text-gradient-android.image /bin/bash && docker cp text-gradient-android-container:/package/TextGradientExample/android/app/build/outputs/apk/release/app-release.apk text-gradient.apk && docker rm -fv text-gradient-android-container",
-    "build:release:docker": "npm run build:docker:image && npm run extract:docker:apk"
+    "build:release:docker": "npm run build:docker:image && npm run extract:docker:apk",
+    "devmenu": "adb shell input keyevent KEYCODE_MENU"
   },
   "dependencies": {
     "react": "16.8.3",

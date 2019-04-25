@@ -20,6 +20,9 @@ public class RNSetGradientSpanOperation {
     if (start == 0) {
       spanFlags = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
     }
-    sb.setSpan(what, start, end, spanFlags);
+
+    if (end <= sb.length()) {
+      sb.setSpan(what, start, end, spanFlags);
+    }
   }
 }

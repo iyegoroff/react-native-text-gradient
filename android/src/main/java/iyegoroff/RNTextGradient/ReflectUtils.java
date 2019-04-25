@@ -28,7 +28,7 @@ class ReflectUtils {
         return null;
     }
 
-
+    @SuppressWarnings("unused")
     static <T> void setFieldValue(Object target, String name, T value, @Nullable Class type) {
         type = type == null ? target.getClass() : type;
 
@@ -43,7 +43,7 @@ class ReflectUtils {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "SameParameterValue"})
     static <T> T invokeMethod(Object target, String name, @Nullable Class type) {
         type = type == null ? target.getClass() : type;
 

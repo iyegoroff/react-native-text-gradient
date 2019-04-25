@@ -8,17 +8,24 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+
+import javax.annotation.Nonnull;
+
 import iyegoroff.RNTextGradient.Linear.RNLinearTextGradientManager;
 import iyegoroff.RNTextGradient.Linear.RNVirtualLinearTextGradientManager;
 
 public class RNTextGradientPackage implements ReactPackage {
     @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+    public @Nonnull List<NativeModule> createNativeModules(
+      @Nonnull ReactApplicationContext reactContext
+    ) {
       return Collections.emptyList();
     }
 
     @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+    public @Nonnull List<ViewManager> createViewManagers(
+      @Nonnull ReactApplicationContext reactContext
+    ) {
       return Arrays.<ViewManager>asList(
         new RNLinearTextGradientManager(),
         new RNVirtualLinearTextGradientManager()
