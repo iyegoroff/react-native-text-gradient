@@ -31,17 +31,24 @@ const createTextGradientClass = (
       numberOfLines: true,
       ellipsizeMode: true,
       allowFontScaling: true,
+      maxFontSizeMultiplier: true,
       disabled: true,
       selectable: true,
       selectionColor: true,
       adjustsFontSizeToFit: true,
       minimumFontScale: true,
       textBreakStrategy: true,
+      onTextLayout: true,
       colors: true,
       locations: true,
       useViewFrame: true,
       useGlobalCache: true,
       ...defaultPropAttributes
+    },
+    directEventTypes: {
+      topTextLayout: {
+        registrationName: 'onTextLayout',
+      },
     },
     uiViewClassName,
   };
@@ -51,10 +58,6 @@ const createTextGradientClass = (
       accessible: true,
       allowFontScaling: true,
       ellipsizeMode: 'tail',
-    };
-
-    static childContextTypes = {
-      isInAParentText: PropTypes.bool
     };
 
     state = {
@@ -67,7 +70,6 @@ const createTextGradientClass = (
     static getDerivedStateFromProps(nextProps, prevState) {
       return prevState.responseHandlers == null && isTouchable(nextProps)
         ? {
-            ...prevState,
             responseHandlers: prevState.createResponderHandlers(),
           }
         : null;
@@ -75,18 +77,6 @@ const createTextGradientClass = (
 
     static canRenderString = true;
     static viewConfig = viewConfig;
-
-    getChildContext() {
-      return {
-        isInAParentText: true
-      };
-    }
-
-    getContextTypes() {
-      return {
-        isInAParentText: PropTypes.bool
-      };
-    }
 
     render() {
       let props = convertProps({
@@ -246,12 +236,13 @@ const createTextGradientClass = (
   );
 
   const RNVirtualTextGradient =
-    UIManager.RNVirtualTextGradient == null
+    UIManager.getViewManagerConfig(uiVirtualViewClassName) == null
       ? RNTextGradient
       : createReactNativeComponentClass(uiVirtualViewClassName, () => ({
           validAttributes: {
             ...ReactNativeViewAttributes.UIView,
             isHighlighted: true,
+            maxFontSizeMultiplier: true,
             colors: true,
             locations: true,
             useGlobalCache: true,
@@ -264,7 +255,7 @@ const createTextGradientClass = (
   const TextGradient = React.forwardRef((props, ref) => (
     <TouchableTextGradient {...props} forwardedRef={ref} />
   ));
-  TextGradient.displayName = 'Text';
+  TextGradient.displayName = uiVirtualViewClassName;
 
   return TextGradient;
 };

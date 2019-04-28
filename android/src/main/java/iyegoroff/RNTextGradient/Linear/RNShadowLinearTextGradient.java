@@ -1,24 +1,25 @@
 package iyegoroff.RNTextGradient.Linear;
 
-import android.text.Spannable;
+import android.text.Layout;
 import android.text.SpannableStringBuilder;
+
 import iyegoroff.RNTextGradient.RNShadowTextGradient;
+
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.views.text.ReactTextShadowNode;
-import android.util.Log;
-import com.facebook.react.common.ReactConstants;
-import java.lang.Exception;
-import java.lang.reflect.Field;
-import java.lang.String;
 import iyegoroff.RNTextGradient.RNSetGradientSpanOperation;
-import android.text.style.ForegroundColorSpan;
 
 public class RNShadowLinearTextGradient extends RNShadowTextGradient {
 
   private float[] mStart;
   private float[] mEnd;
 
+  RNShadowLinearTextGradient(ReactApplicationContext context) {
+    super(context);
+  }
+
+  @SuppressWarnings("unused")
   @ReactProp(name = "gradientStart")
   public void setStart(ReadableArray start) {
     if (start != null) {
@@ -31,6 +32,7 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     }
   }
 
+  @SuppressWarnings("unused")
   @ReactProp(name = "gradientEnd")
   public void setEnd(ReadableArray end) {
     if (end != null) {
@@ -49,7 +51,8 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
     int start,
     int end,
     float maxWidth,
-    float maxHeight
+    float maxHeight,
+    Layout layout
   ) {
     RNLinearTextGradientSpan span = new RNLinearTextGradientSpan(
       mLocations,
@@ -57,10 +60,11 @@ public class RNShadowLinearTextGradient extends RNShadowTextGradient {
       mStart,
       mEnd,
       mUseViewFrame,
-      maxWidth,
-      maxHeight,
+      layout,
       start,
       end,
+      maxWidth,
+      maxHeight,
       builder.toString()
     );
 

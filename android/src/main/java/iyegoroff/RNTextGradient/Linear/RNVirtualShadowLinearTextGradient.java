@@ -1,9 +1,12 @@
 package iyegoroff.RNTextGradient.Linear;
 
-import android.util.Log;
-import com.facebook.react.common.ReactConstants;
+import com.facebook.react.bridge.ReactApplicationContext;
 
 public class RNVirtualShadowLinearTextGradient extends RNShadowLinearTextGradient {
+
+  RNVirtualShadowLinearTextGradient(ReactApplicationContext context) {
+    super(context);
+  }
 
   @Override
   public boolean isVirtual() {

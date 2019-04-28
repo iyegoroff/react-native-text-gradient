@@ -23,8 +23,7 @@ React-Native text gradient component for iOS & Android.
 
 ## Status
 
-- iOS - component works as drop-in replacement for standard `Text` component, e.g. it is possible to have nested gradients;
-- Android - currently only basic 'wrapper'-like behavior without nesting is supported, [WIP](https://github.com/iyegoroff/react-native-text-gradient/tree/android-nested-gradient);
+- Component works as drop-in replacement for standard `Text` component and it is possible to have nested gradients.
 - React-Native:
   - with rn >= 0.56.0 use latest version and [patch](#usage-with-rn--0560);
   - with rn >= 0.55.0 use 0.0.9;
@@ -114,9 +113,3 @@ When mixing several text gradients and `Text`s top component always should be te
 ```
 
 This is necessary because only top text component is 'mapped' to actual native node and its children are 'virtual' from the native perspective.
-
-## FAQ
-
-#### Is it ready for production?
-
-- Yes, I use it in production

@@ -2,25 +2,29 @@ package iyegoroff.RNTextGradient.Linear;
 
 import iyegoroff.RNTextGradient.RNTextGradientManager;
 import iyegoroff.RNTextGradient.RNShadowTextGradient;
+
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.common.annotations.VisibleForTesting;
 import com.facebook.react.module.annotations.ReactModule;
-import android.util.Log;
-import com.facebook.react.common.ReactConstants;
+
+import javax.annotation.Nonnull;
 
 @ReactModule(name = RNLinearTextGradientManager.REACT_CLASS)
 public class RNLinearTextGradientManager extends RNTextGradientManager {
 
     @VisibleForTesting
-    public static final String REACT_CLASS = "RNLinearTextGradient";
+    static final String REACT_CLASS = "RNLinearTextGradient";
 
     @Override
-    public String getName() {
+    public @Nonnull String getName() {
         return REACT_CLASS;
     }
 
     @Override
-    public RNShadowTextGradient createShadowNodeInstance() {
-        return new RNShadowLinearTextGradient();
+    public @Nonnull RNShadowTextGradient createShadowNodeInstance(
+      @Nonnull ReactApplicationContext context
+    ) {
+        return new RNShadowLinearTextGradient(context);
     }
 
     @Override
