@@ -7,7 +7,7 @@
 1. Open your Podfile in (usually in `[your project's name]` ➜ `ios` ➜ `Podfile`)
 2. Append the following lines to your `Podfile`:
    ```
-   pod 'react-native-text-gradient',
+   pod 'RNTextGradientView',
      :path => "../node_modules/react-native-text-gradient/RNTextGradientView.podspec"
    ```
 3. Go to `[your project's name]` ➜ `ios` and run the following:
