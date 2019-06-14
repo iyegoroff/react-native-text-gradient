@@ -37,6 +37,7 @@
     "img",
     ".dockerignore",
     "*.md",
+    "*.podspec",
     "patch-rn.js"
   ]
 }
