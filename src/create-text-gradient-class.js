@@ -11,7 +11,6 @@ import TextAncestor from 'react-native/Libraries/Text/TextAncestor';
 import createReactNativeComponentClass from 'react-native/Libraries/Renderer/shims/createReactNativeComponentClass';
 import nullthrows from 'fbjs/lib/nullthrows';
 import { Touchable, processColor, UIManager } from 'react-native';
-import PropTypes from "prop-types";
 
 const PRESS_RECT_OFFSET = {top: 20, left: 20, right: 20, bottom: 30};
 

@@ -1,4 +1,4 @@
-FROM iyegoroff/fable-android:1
+FROM iyegoroff/ubuntu-node-android-git:1
 
 RUN mkdir /package
 COPY . /package

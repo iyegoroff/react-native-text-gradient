@@ -25,7 +25,6 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "prop-types": "*",
     "fbjs": "*",
     "@babel/runtime": "*"
   },
