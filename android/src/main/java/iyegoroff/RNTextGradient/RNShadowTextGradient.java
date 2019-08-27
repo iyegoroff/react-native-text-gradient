@@ -16,7 +16,7 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import java.lang.ref.WeakReference;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.Layout;
 import java.lang.String;
