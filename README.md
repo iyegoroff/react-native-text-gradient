@@ -7,6 +7,23 @@
 
 React-Native text gradient component for iOS & Android.
 
+## Status
+
+🚧🚧🚧
+
+Currently rntg is on hiatus, but I'll update it someday. Last supported react-native version is "<strong>0.59.10</strong>".
+
+🚧🚧🚧
+- Component works as drop-in replacement for standard `Text` component and it is possible to have nested gradients.
+- React-Native:
+  - with rn >= 0.59.0 use latest version and [patch](#usage-with-rn--0560);
+  - with rn >= 0.56.0 use 0.0.17 and [patch](#usage-with-rn--0560);
+  - with rn >= 0.55.0 use 0.0.9;
+  - with rn >= 0.54.0 use 0.0.7;
+  - with rn >= 0.53.1 use 0.0.4;
+  - rn 0.53.0 is not supported;
+  - with rn >= 0.50.0 use 0.0.3.
+
 ## Getting started
 
 `$ npm install react-native-text-gradient --save`
@@ -20,18 +37,6 @@ React-Native text gradient component for iOS & Android.
 [link](manual_installation.md)
 
 > If you are using Cocoapods you need to follow the manual installation guide.
-
-## Status
-
-- Component works as drop-in replacement for standard `Text` component and it is possible to have nested gradients.
-- React-Native:
-  - with rn >= 0.59.0 use latest version and [patch](#usage-with-rn--0560);
-  - with rn >= 0.56.0 use 0.0.17 and [patch](#usage-with-rn--0560);
-  - with rn >= 0.55.0 use 0.0.9;
-  - with rn >= 0.54.0 use 0.0.7;
-  - with rn >= 0.53.1 use 0.0.4;
-  - rn 0.53.0 is not supported;
-  - with rn >= 0.50.0 use 0.0.3.
 
 ## Example
 
